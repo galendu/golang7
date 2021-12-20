@@ -36,7 +36,7 @@ centos：
 Ubuntu：       
   apt-get install git
 
-git clone https://gitee.com/magedu/golang5.git
+git clone https://gitee.com/magedu/golang7.git
 
 更新本地代码 git pull
 
