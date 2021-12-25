@@ -30,6 +30,6 @@ func main() {
 	fmt.Printf("65535: %s\n", BinaryFormat(65535))
 	fmt.Printf("-65535: %s\n", BinaryFormat(-65535))
 
-	fmt.Printf("2147483647: %s\n", BinaryFormat(2147483647))
-	fmt.Printf("-2147483647: %s\n", BinaryFormat(-2147483647))
+	fmt.Printf("260: %s\n", BinaryFormat(260))
+	fmt.Printf("-260: %s\n", BinaryFormat(-260))
 }
