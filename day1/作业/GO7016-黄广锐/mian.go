@@ -25,11 +25,7 @@ func main() {
 	fmt.Println(BinaryFormat(-1))
 	fmt.Println(BinaryFormat(1))
 	fmt.Println(BinaryFormat(0))
-	fmt.Println(BinaryFormat(265))
-	fmt.Println(BinaryFormat(-265))
-	fmt.Println(BinaryFormat(128))
-	fmt.Println(BinaryFormat(-128))
-	fmt.Println(BinaryFormat(256))
-	fmt.Println(BinaryFormat(-256))
+	fmt.Println(BinaryFormat(260))
+	fmt.Println(BinaryFormat(-260))
 
 }
