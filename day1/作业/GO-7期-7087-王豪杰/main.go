@@ -7,7 +7,7 @@ import (
 )
 
 //32位运算
-func binaryFamat(n int32) string  {
+func binaryFormat(n int32) string  {
 	Source := uint32(n)
 	strBuiuld := strings.Builder{}
 	Dest := uint32(math.Pow(2,31))
@@ -26,12 +26,12 @@ func binaryFamat(n int32) string  {
 
 func main()  {
 
-	binary := binaryFamat(7)
-	binary = binaryFamat(-7)
-	binary = binaryFamat(260)
+	binary := binaryFormat(7)
+	binary = binaryFormat(-7)
+	binary = binaryFormat(260)
 	fmt.Println(binary)
-	binary = binaryFamat(-260)
+	binary = binaryFormat(-260)
 	fmt.Println(binary)
-	binary = binaryFamat(^260)
+	binary = binaryFormat(^260)
 	fmt.Println(binary)
 }
