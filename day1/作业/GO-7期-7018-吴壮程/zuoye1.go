@@ -16,7 +16,7 @@ func BinaryFormat(n int32) string {
 		} else {
 			sb.WriteString("0")
 		}
-		c  >>= 1 
+		c = c >> 1
 	}
 	return sb.String()
 }
