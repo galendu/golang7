@@ -40,4 +40,4 @@ func main() {
 }
 
 //go run homework/oneday/1.go
-//测试。。。。
+//测试反引号``
