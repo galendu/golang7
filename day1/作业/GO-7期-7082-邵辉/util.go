@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-//函数BinaryFormat 用于接收int32数据，然后以字符串形式返回二进制格式数据
+//函数BinaryFormat 将int32转换为二进制
 func BinaryFormat(n int32) string {
 	a := uint32(n)
 	sb := strings.Builder{}
@@ -23,7 +23,14 @@ func BinaryFormat(n int32) string {
 }
 
 func main() {
-	var a int32 = 261
-	fmt.Printf("261 %s\n", BinaryFormat(a))
-	fmt.Printf("-261 %s\n", BinaryFormat(-a))
+	fmt.Printf("   0的二进制是 %s\n", BinaryFormat(0))
+	fmt.Printf("   1的二进制是 %s\n", BinaryFormat(1))
+	fmt.Printf("  -1的二进制是 %s\n", BinaryFormat(-1))
+	fmt.Printf(" 260的二进制是 %s\n", BinaryFormat(260))
+	fmt.Printf("-260的二进制是 %s\n", BinaryFormat(-260))
+
+	fmt.Printf("65536的二进制是 %s\n", BinaryFormat(65536))
+	fmt.Printf("-65536的二进制是 %s\n", BinaryFormat(-65536))
+	fmt.Printf("2184364的二进制是 %s\n", BinaryFormat(2184364))
+	fmt.Printf("-2184364的二进制是 %s\n", BinaryFormat(-2184364))
 }
