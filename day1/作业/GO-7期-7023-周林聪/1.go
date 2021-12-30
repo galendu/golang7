@@ -23,14 +23,21 @@ func BinaryFormat(n int32) string {
 }
 
 func main() {
-	fmt.Printf("%032b\n", 260)
-	fmt.Println(BinaryFormat(260))
-	fmt.Println(BinaryFormat(-260))
+	var aaa uint32 = 260
+	var bbb uint32 = 660
+
+	fmt.Printf(" 260 == %032b\n", 260)
+	fmt.Printf(" 260 == %s\n", BinaryFormat(260))
+	fmt.Printf("-260 == %b\n", -aaa)
+	fmt.Printf("-260 == %s\n", BinaryFormat(-260))
+
 	fmt.Println(BinaryFormat(0))
 
-	fmt.Printf("%032b\n", 660)
-	fmt.Println(BinaryFormat(660))
-	fmt.Println(BinaryFormat(-660))
+	fmt.Printf(" 660 == %032b\n", 660)
+	fmt.Printf(" 660 == %s\n", BinaryFormat(660))
+	fmt.Printf("-660 == %b\n", -bbb)
+	fmt.Printf("-660 == %s\n", BinaryFormat(-660))
 }
 
 //go run homework/oneday/1.go
+//测试。。。。
