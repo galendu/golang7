@@ -103,7 +103,7 @@
 - 简单，学习成本低，内部人员可以转入Go阵营。
 - 使用Go能更接近云原生生态，比如docker，k8s, habor都是用Go开发的。 
 ## 开发环境搭建
-1. 下载。到https://studygolang.com/dl上下载最新的Go稳定版本。
+1. 下载。到 https://studygolang.com/dl 上下载最新的Go稳定版本。
 2. 安装。对于Windows和macOS用户，直接双击即可安装，留意一下安装路径。对于Linux用户，直接解压安装包即可，比如你打算把go安装到/usr/local目录下，则使用命令
 tar zxvf goxxx.tar.gz –C /usr/local。这样go标准库及相关的可执行文件就安装到了/usr/local/go目录下，在后续的步骤中会把/usr/local/go赋给GOROOT环境变量。  
 3. 准确GOPATH。在任意目录下创建一个空目录，将来用于存放go语言第三方库文件。比如你打算使用/data/go_path这个目录，则在Linux下使用命令mkdir -p /data/go_path。在GOPATH目录建3个子目录：src、bin、pkg。  
