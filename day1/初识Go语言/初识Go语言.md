@@ -55,16 +55,24 @@
 - 2010年1月8日，当选2009年年度语言。
 - 2010年5月，谷歌投入使用。
 - 2011年4月，谷歌开始抽调员工全职开发Go语言，并于5月宣布Google APP Engine支持Go语言。
-![avatar](img/tiobe_index_for_go.png)
+
+![avatar](img/tiobe_index_for_go.png)  
+
 参考网站https://www.test.tiobe.com/tiobe-index/go。 
-![avatar](img/git_hut_pull_request_for_go1.png)
-![avatar](img/git_hut_pull_request_for_go2.png) 
+
+![avatar](img/git_hut_pull_request_for_go1.png)  
+![avatar](img/git_hut_pull_request_for_go2.png)  
+
 参考网站https://madnight.github.io/githut/#/pull_requests。
 ### 现状
-从世界范围看，Go语言在中国的发展势头最猛，且远超第二名。在很多互联网大厂Go已成为主要开发语言。
+&#8195;&#8195;从世界范围看，Go语言在中国的发展势头最猛，且远超第二名。在很多互联网大厂Go已成为主要开发语言。  
+
 ![avatar](img/chinese_company_use_go.png)
-不论大小公司，对Go人才需求紧迫，薪酬很高。
+
+&#8195;&#8195;不论大小公司，对Go人才需求紧迫，薪酬很高。  
+
 ![avatar](img/go_position.png)
+
 ## Go语言的优劣
 **优势**
 - 语法简单，易于学习。类C的语法，同时比C/C++简洁和干净。
@@ -85,6 +93,7 @@
 - 复杂事件处理。
 - 对实时性要求很高的软件开发。
 - 可以在Intel和ARM处理器上运行，因此也可以在安卓上运行。
+
 ![avatar](img/application_of_go.png)
 ### go微服务开发
 - 零依赖，让我们可以最小化我们的镜像,节省存储与拉取镜像带宽。
@@ -105,13 +114,22 @@ export GOPATH=/data/go_path
 export PATH=$PATH:$GOROOT/bin: :$GOPATH/bin
 ```
 &#8195;&#8195;PATH环境变量下的可执行文件在任意目录下都可以直接访问。  
-&#8195;&#8195;对于Windows用户，找到"控制面板->高级系统设置->高级->环境变量"，编辑系统变量区域，新增GOROOT和GOPATH，把GOROOT/bin和GOPATH/bin添加到Path里。
+&#8195;&#8195;对于Windows用户，编辑用户环境变量，新增GOROOT和GOPATH，把GOROOT/bin和GOPATH/bin添加到Path里。如下图    
+![avatar](img/设置go环境变量1.png)  
+ 
+![avatar](img/设置go环境变量2.png)   
+
+![avatar](img/设置go环境变量3.png)  
+
+![avatar](img/设置go环境变量4.png)  
+
 &#8195;&#8195;有很多网站支持在线编辑Go代码并查看运行结果，这里列举一些  
 https://play.golang.wiki  
 https://play.studygolang.com  
 https://goplay.space  
 https://goplay.tools  
-&#8195;&#8195;集成开发环境推荐GoLand和VSCode，后者是免费的。VSCode需要额外安装支持Go语言的插件，如下图
+&#8195;&#8195;集成开发环境推荐GoLand和VSCode，后者是免费的。VSCode需要额外安装支持Go语言的插件，如下图  
+
 ![avatar](img/go_plugin_for_vscode.png)
 ## 第一个Go程序
 ```Go
