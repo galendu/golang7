@@ -143,7 +143,11 @@ func main() {
 	fmt.Println("Hello World")
 }
 ```
-&#8195;&#8195;main()函数是Go程序的唯一入口，且main()函数必须位于package main中。fmt是Go标准库中的一个package，该package下有一个Println()函数用于输出字符串。
+&#8195;&#8195;main()函数是Go程序的唯一入口，且main()函数必须位于package main中。fmt是Go标准库中的一个package，该package下有一个Println()函数用于输出字符串。Go语言会依次从以下3个目录里查找依赖包：
+1. 当前工作目录
+2. $GOPATH/pkg/mod
+3. $GOROOT/src
+
 ## Go命令介绍
 ```Shell
 (base) zcymac:~ zcy$ go help
