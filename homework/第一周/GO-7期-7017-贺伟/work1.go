@@ -33,3 +33,4 @@ func main() {
 	fmt.Printf("-32的二进制：%s\n", BinaryFormat(-32))
 	fmt.Printf("9999的二进制：%s\n", BinaryFormat(9999))
 }
+// 逻辑正确，也考虑格式化输出了，建议只提交作业

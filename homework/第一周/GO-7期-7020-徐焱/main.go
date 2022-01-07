@@ -29,3 +29,5 @@ func main() {
 	fmt.Printf("260的二进制为：%s\n", BinaryFormat(260))
 	fmt.Printf("-260的二进制为：%s\n", BinaryFormat(-260))
 }
+
+// 逻辑正确，也考虑格式化输出了

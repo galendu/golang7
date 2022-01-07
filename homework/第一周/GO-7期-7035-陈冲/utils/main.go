@@ -24,3 +24,6 @@ func binary_compute() {
 func main() {
 	binary_compute()
 }
+
+// 只提交作业内容接口
+// 工程化实现不正确，可多学习相关内容

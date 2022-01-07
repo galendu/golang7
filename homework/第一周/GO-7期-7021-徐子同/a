@@ -4,25 +4,25 @@ import (
 	"fmt"
 	"math"
 	"strings"
-)//输出一个int32对应的二进制表示
+) //输出一个int32对应的二进制表示
 func BinaryFormat(n int32) string {
 	a := uint32(n)
 	sb := strings.Builder{}
 	c := uint32(math.Pow(2, 31))
 	for i := 0; i < 32; i++ {
-		if  a&c != 0 {
+		if a&c != 0 {
 			sb.WriteString("1")
 		} else {
 			sb.WriteString("0")
 		}
-		c=c >> 1
+		c = c >> 1
 	}
 	return sb.String()
 }
 
 //完成两行填空，然后写一个main函数调用BinaryFormat，看一下0、1、-1、260、-260对应的二进程表示是什么
 
-func main(){
+func main() {
 	a := BinaryFormat(0)
 	fmt.Println(a)
 	b := BinaryFormat(1)
@@ -34,3 +34,6 @@ func main(){
 	e := BinaryFormat(-260)
 	fmt.Println(e)
 }
+
+// 1、逻辑正确
+// 2、要以go程序文件格式提交作业

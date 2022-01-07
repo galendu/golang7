@@ -22,8 +22,12 @@ func BinaryFormat(n int32) string {
 }
 
 func main() {
-fmt.Println(BinaryFormat(3))
-fmt.Println(BinaryFormat(4))
-fmt.Println(BinaryFormat(-120))
+	fmt.Println(BinaryFormat(3))
+	fmt.Println(BinaryFormat(4))
+	fmt.Println(BinaryFormat(-120))
 
 }
+
+// 1、可以考虑格式化输出
+// 2、注意下代码层级
+// 3、逻辑正确，建议只提交作业要求的即可

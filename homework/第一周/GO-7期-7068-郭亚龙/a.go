@@ -26,3 +26,5 @@ func main() {
 	fmt.Println(BinaryFormat(4))
 	fmt.Println(BinaryFormat(-260))
 }
+
+// 提交作业要求的内容即可

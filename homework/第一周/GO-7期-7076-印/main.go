@@ -32,3 +32,5 @@ func main() {
 	fmt.Println(BinFormat(-260))
 
 }
+
+// 逻辑正确，不过建议考虑格式化输出

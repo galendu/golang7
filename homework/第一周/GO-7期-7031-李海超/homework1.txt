@@ -29,3 +29,6 @@ func main() {
 	fmt.Println(BinaryFormat(260))
 	fmt.Println(BinaryFormat(-260))
 }
+
+// 成品省略测试过程即可
+// 以go程序文件的格式提交作业

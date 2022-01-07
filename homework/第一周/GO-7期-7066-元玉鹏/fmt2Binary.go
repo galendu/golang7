@@ -1,7 +1,6 @@
 package BinaryFormat
 
 import (
-	"fmt"
 	"strings"
 )
 
@@ -36,3 +35,5 @@ func BinaryFormat(n int32) string {
 /*
 	注意：此函数输出的二进制表达形式为原码形式，实际的加减运算逻辑都是在补码的形势下进行计算的
 */
+
+// 单文件建议使用package main

@@ -40,3 +40,5 @@ func main() {
 	fmt.Printf("-1226=%s\n", BinaryFormat(-1226))
 
 }
+
+// 有想到格式化输出，不过建议只提交作业内容即可

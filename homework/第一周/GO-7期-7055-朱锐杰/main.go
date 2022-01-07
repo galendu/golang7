@@ -29,3 +29,5 @@ func main() {
 	fmt.Printf("输出为%s\n", BinaryFormat(-260))
 
 }
+
+// 既然格式化输出了，要让输出的信息更详细些

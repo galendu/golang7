@@ -30,3 +30,5 @@ func main() {
 	fmt.Printf("%v\n", BinaryFormat(260))
 	fmt.Printf("%v\n", BinaryFormat(-260))
 }
+
+// 输出打印时，可以实现下格式化输出

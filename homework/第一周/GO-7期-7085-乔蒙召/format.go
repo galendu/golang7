@@ -3,7 +3,7 @@ package format
 import (
 	"math"
 	"strconv"
-    "strings"
+	"strings"
 )
 
 func BinaryFormat(n int) string {
@@ -20,3 +20,5 @@ func BinaryFormat(n int) string {
 	}
 	return sb.String()
 }
+
+// 单文件情况，使用package main，也不要忘记程序入口main函数

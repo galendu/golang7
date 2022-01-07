@@ -33,3 +33,6 @@ func main() {
 	fmt.Printf("2147483647: %s\n", BinaryFormat(2147483647))
 	fmt.Printf("-2147483647: %s\n", BinaryFormat(-2147483647))
 }
+
+// 1、这种情况下不需要go.mod
+// 2、逻辑正确，不过建议只提交作业内容即可

@@ -27,3 +27,6 @@ func main() {
 	fmt.Println(BinaryFormat(40))
 	fmt.Println(BinaryFormat(-2))
 }
+
+
+// 逻辑正确，可考虑格式化输出，只提交作业内容即可

@@ -29,3 +29,5 @@ func main() {
 	fmt.Printf("e=%s\n", BinaryFormat(-e))
 
 }
+
+//逻辑是正确，建议完成作业的内容

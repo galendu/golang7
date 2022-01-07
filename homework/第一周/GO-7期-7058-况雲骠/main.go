@@ -17,3 +17,5 @@ func main() {
 	fmt.Printf("260 %s\n", Binary.BinaryFormat(d))
 	fmt.Printf("-260 %s\n", Binary.BinaryFormat(e))
 }
+
+// 工程化实现不正确，可多学习预习视频中的相关内容，后面也会讲

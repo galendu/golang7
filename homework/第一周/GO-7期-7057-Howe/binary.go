@@ -21,3 +21,6 @@ func DecimalToBinary(num int32) string {
 	}
 	return result.String()
 }
+
+// 1、单文件使用package main，不要忘记程序的入口main函数
+// 2、输出内容时，可以格式化输出

@@ -34,3 +34,5 @@ func main() {
 	fmt.Printf("2184364的二进制是 %s\n", BinaryFormat(2184364))
 	fmt.Printf("-2184364的二进制是 %s\n", BinaryFormat(-2184364))
 }
+
+// 有实现格式化输出，不过只提交作业内容即可

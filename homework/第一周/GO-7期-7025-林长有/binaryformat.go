@@ -13,7 +13,7 @@ func BinaryFormat(n int32) string {
 	for i := 0; i < 32; i++ {
 		if a&c != 0 {
 			sb.WriteString("1")
-		}else {
+		} else {
 			sb.WriteString("0")
 		}
 		c >>= 1
@@ -27,3 +27,5 @@ func main() {
 	fmt.Printf("os arch %s\n", BinaryFormat(16))
 	fmt.Printf("os arch %s\n", BinaryFormat(-16))
 }
+
+// 逻辑正确，格式化输出时内容要对应

@@ -30,3 +30,6 @@ func main() {
 	fmt.Println(BinaryFormat(260))
 	fmt.Println(BinaryFormat(-260))
 }
+
+// 1、可以格式化输出，让人很容易看明白
+// 2、提交作业时，可以不用提交中间打印验证过程

@@ -11,7 +11,7 @@ func BinaryFormat(n int32) string {
 	sb := strings.Builder{}
 	c := uint32(math.Pow(2, 31))
 	for i := 0; i < 32; i++ {
-		if  a & c > 0 {
+		if a&c > 0 {
 			sb.WriteString("1")
 		} else {
 			sb.WriteString("0")
@@ -21,12 +21,13 @@ func BinaryFormat(n int32) string {
 	return sb.String()
 }
 
-func main(){
+func main() {
 	result1 := BinaryFormat(0)
 	result2 := BinaryFormat(1)
 	result3 := BinaryFormat(-1)
 	result4 := BinaryFormat(260)
 	result5 := BinaryFormat(-260)
-	fmt.Println(result1,result2,result3,result4,result5)
+	fmt.Println(result1, result2, result3, result4, result5)
 }
 
+// 这种输出建议不要在一行，也考虑下格式化输出

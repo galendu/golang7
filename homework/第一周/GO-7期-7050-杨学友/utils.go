@@ -19,3 +19,5 @@ func BinaryFormat(n int32) string {
 	}
 	return sb.String()
 }
+
+// 单文件建议使用package main，也不要忘记程序入口main函数

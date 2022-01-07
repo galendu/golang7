@@ -11,7 +11,7 @@ func BinaryFormat(n int32) string {
 	sb := strings.Builder{}
 	c := uint32(math.Pow(2, 31))
 	for i := 0; i < 32; i++ {
-		if a & c > 0 {
+		if a&c > 0 {
 			sb.WriteString("1")
 		} else {
 			sb.WriteString("0")
@@ -20,3 +20,5 @@ func BinaryFormat(n int32) string {
 	}
 	return sb.String()
 }
+
+// 不要忘记函数的入口函数main函数

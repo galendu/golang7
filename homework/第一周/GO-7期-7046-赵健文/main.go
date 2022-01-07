@@ -1,9 +1,9 @@
 package main
 
 import (
-        "fmt"
-        "math"
-        "strings"
+	"fmt"
+	"math"
+	"strings"
 )
 
 func BinaryFormat(p int32) string {
@@ -35,3 +35,6 @@ func main() {
         fmt.Println(BinaryFormat(p4))
         fmt.Println(BinaryFormat(p5))
 }
+
+
+// 建议输出时格式化输出，还要注意代码缩进

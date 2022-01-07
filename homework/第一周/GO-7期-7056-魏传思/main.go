@@ -29,3 +29,5 @@ func main() {
 	fmt.Println(BinaryFormat(1088))
 
 }
+
+// 逻辑是正确的，建立输出时考虑格式化输出。作业要提交作业的内容

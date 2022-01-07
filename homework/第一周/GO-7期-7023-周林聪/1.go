@@ -41,3 +41,5 @@ func main() {
 
 //go run homework/oneday/1.go
 //测试反引号``
+
+// 逻辑是正确的，建议只提交作业内容

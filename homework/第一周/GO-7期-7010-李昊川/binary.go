@@ -19,3 +19,5 @@ func BinaryFormat(n int32) string {
 	}
 	return sb.String()
 }
+
+// 逻辑是正确的，单文件直接定义为package main即可

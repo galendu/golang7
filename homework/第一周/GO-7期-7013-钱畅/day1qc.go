@@ -28,3 +28,5 @@ func main() {
 	num := BinaryFormat(21)
 	fmt.Printf(num)
 }
+
+// 逻辑是正确的，一方面可以考虑格式化输出，另一方面选择合适的输出方法

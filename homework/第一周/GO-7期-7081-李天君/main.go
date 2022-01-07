@@ -27,3 +27,5 @@ func main() {
 	fmt.Println(BinaryFormat(-123))
 	fmt.Println(BinaryFormat(0))
 }
+
+// 不用分格式化输出和非格式化输出，直接使用格式化输出就行。另外只提交作业相关的内容即可

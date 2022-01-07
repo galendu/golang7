@@ -5,7 +5,7 @@ import (
 )
 
 func f1(n int32) {
-	fmt.Printf("%.32b\n",n)
+	fmt.Printf("%.32b\n", n)
 }
 
 func main() {
@@ -15,3 +15,5 @@ func main() {
 	f1(260)
 	f1(-260)
 }
+
+// 作业按照作业要求来

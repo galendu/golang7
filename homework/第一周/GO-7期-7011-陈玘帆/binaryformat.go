@@ -28,3 +28,5 @@ func main() {
 	fmt.Println(BinaryFormat(260))
 	fmt.Println(BinaryFormat(-260))
 }
+
+// 逻辑是正确的，可以尝试下格式化输出

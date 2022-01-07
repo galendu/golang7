@@ -29,3 +29,5 @@ func main() {
 	fmt.Println(BinaryFormat(-260))
 
 }
+
+// 考察进制的转换，知识点涉及到位运算和逻辑运算，可以格式化输出下

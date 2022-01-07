@@ -22,10 +22,12 @@ func BinaryFormat(n int32) string {
 	return sb.String()
 }
 
-func main(){
+func main() {
 	fmt.Println(BinaryFormat(0))
 	fmt.Println(BinaryFormat(-1))
 	fmt.Println(BinaryFormat(1))
 	fmt.Println(BinaryFormat(260))
 	fmt.Println(BinaryFormat(-260))
 }
+
+// 输出打印时，可以实现下格式化输出

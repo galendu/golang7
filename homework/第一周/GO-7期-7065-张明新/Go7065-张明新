@@ -33,3 +33,5 @@ func main() {
 	fmt.Printf("260: %s\n", BinaryFormat(260))
 	fmt.Printf("-260: %s\n", BinaryFormat(-260))
 }
+
+//  逻辑正确，要以go程序文件提交作业
