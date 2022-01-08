@@ -5,6 +5,7 @@ import (
 	"math/rand"
 	"strconv"
 	"strings"
+	"time"
 )
 
 func arr2string(arr []int) string {
@@ -28,6 +29,7 @@ func MapVertifyElements() {
 	Slice := make([]int, 0, 10)
 	Map := make(map[int]int, 10)
 	for i := 0; i <= 100; i++ {
+		rand.Seed(time.Now().UnixNano())
 		tmp := rand.Intn(128)
 		Slice = append(Slice, tmp)
 		Map[tmp]++
