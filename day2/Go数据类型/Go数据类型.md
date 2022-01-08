@@ -56,10 +56,6 @@ var t error = errors.New("my error")
 fmt.Printf("error is %v\n", t)
 fmt.Printf("error is %+v\n", t) //在 %v 基础上，对结构体字段名和值进行展开
 fmt.Printf("error is %#v\n", t) //输出 Go 语言语法格式的值
-
-var b byte = 100
-var r rune = '汉' //rune可以表示2147483647种字符，包括所有汉字和各种特殊符号
-fmt.Printf("b=%d, r=%d\n", b, r)
 ```
 &#8195;&#8195;数值型变量的默认值是0，字符串的默认值是空字符串，布尔型变量的默认值是false，引用类型、函数、指针、接口的默认值是nil。数组的默认值取每个元素对应类型的默认值，结构体的默认值取每个成员变量对应类型的默认值。
 ```Go
@@ -404,7 +400,6 @@ i = int(by)		//byte转为int
 - float和int可以互相转换，小数位会丢失。
 - bool和int不能相互转换。
 - 不同长度的int或float之间可以相互转换。
-- 不能对常量执行强制类型转换。
 ```Go
 //高精度向低精度转换，数字很小时这种转换没问题
 var ua uint64 = 1
@@ -522,6 +517,34 @@ for _, value := range m {
 for key, value := range m {
     fmt.Printf("%s=%d\n", key, value)
 }
+```
+&#8195;&#8195;map中的key可以是任意能够用==操作符比较的类型，不能是函数、map、切片，以及包含上述3中类型成员变量的的struct。map的value可以是任意类型。  
+```Go
+type f func(int) bool
+type m map[int]byte
+type s []int
+
+type i int
+
+var m1 map[i]f
+fmt.Println(m1)
+
+/** 函数、map、切片不能当key **/
+// var m2 map[f]bool
+// fmt.Println(m2)
+// var m3 map[m]bool
+// fmt.Println(m3)
+// var m4 map[s]bool
+// fmt.Println(m4)
+
+type user struct {
+	scores float32 //如果scores是slice，则user不能作为map的key
+}
+
+u := user{}
+m5 := make(map[user]interface{})
+m5[u] = 5
+fmt.Println(m5)
 ```
 ## channel
 &#8195;&#8195;channel(管道)底层是一个环形队列(先进先出)，send(插入)和recv(取走)从同一个位置沿同一个方向顺序执行。sendx表示最后一次插入元素的位置，recvx表示最后一次取走元素的位置。  
