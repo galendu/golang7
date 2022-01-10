@@ -40,10 +40,8 @@ func zy2(arr []int) string {
 }
 
 func main() {
-	//1. 创建一个初始长度为0、容量为10的int型切片，调用rand.Intn(128)100次
 	zy1()
 
-	//2. 实现一个函数func arr2string(arr []int) string，比如输入[]int{2,4,6}
 	arr := []int{2, 4, 6, 8, 10}
 	fmt.Printf("返回\"%v\"\n", zy2(arr))
 }
