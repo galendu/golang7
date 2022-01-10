@@ -44,7 +44,6 @@ func main() {
 	zy1()
 
 	//2. 实现一个函数func arr2string(arr []int) string，比如输入[]int{2,4,6}
-	//返回“2 4 6”。输入的切片可能很短，也可能很长。
 	arr := []int{2, 4, 6, 8, 10}
 	fmt.Printf("返回\"%v\"\n", zy2(arr))
 }
