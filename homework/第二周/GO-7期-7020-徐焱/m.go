@@ -9,10 +9,10 @@ import (
 )
 
 func zy1() {
-	sli := make([]int, 0, 10)   //定义一个长度为0、容量为10的int型切片
-	for i := 1; i <= 100; i++ { //循环100次
-		rand.Seed(time.Now().UnixNano())  //设置随机数种子
-		sli = append(sli, rand.Intn(128)) //将随机数append到sli切片
+	sli := make([]int, 0, 10)   
+	for i := 1; i <= 100; i++ { 
+		rand.Seed(time.Now().UnixNano())  
+		sli = append(sli, rand.Intn(128)) 
 	}
 	fmt.Printf("sli 共有%d个元素\n%v\n", len(sli), sli)
 
