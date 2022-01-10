@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-func zy1() {
+func test() {
 	sli := make([]int, 0, 10)   
 	for i := 1; i <= 100; i++ { 
 		rand.Seed(time.Now().UnixNano())  
@@ -24,7 +24,7 @@ func zy1() {
 	fmt.Printf("map中共有%d个互不相同的元素\n%v\n", len(m), m)
 }
 
-func zy2(arr []int) string {
+func arr2string(arr []int) string {
 	sb := strings.Builder{}
 	for k, v := range arr {
 		if (len(arr) - 1) == k {
@@ -40,8 +40,8 @@ func zy2(arr []int) string {
 }
 
 func main() {
-	zy1()
+	test()
 
 	arr := []int{2, 4, 6, 8, 10}
-	fmt.Printf("返回\"%v\"\n", zy2(arr))
+	fmt.Printf("返回\"%v\"\n", arr2string(arr))
 }
