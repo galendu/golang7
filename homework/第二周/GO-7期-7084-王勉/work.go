@@ -5,6 +5,7 @@ import (
 	"math/rand"
 	"strconv"
 	"strings"
+	"time"
 )
 
 func combine_str(arr []int) string{
@@ -32,6 +33,7 @@ func main()  {
 	m = make(map[int]int)
 	arr = []int{}
 	sole = []int{}
+	rand.Seed(time.Now().Unix())
 	for i := 0; i <100; i++ {
 		arr = append(arr, rand.Intn(128))
 	}
