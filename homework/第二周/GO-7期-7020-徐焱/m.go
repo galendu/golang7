@@ -16,9 +16,9 @@ func zy1() {
 	}
 	fmt.Printf("sli 共有%d个元素\n%v\n", len(sli), sli)
 
-	var m = make(map[int]int) //定义一个map
-	for k, y := range sli {   //遍历sli
-		m[y] = k //将sli的值指定为map的index，因为index不能重复，若重复则追加
+	var m = make(map[int]int) 
+	for k, y := range sli {   
+		m[y] = k 
 	}
 
 	fmt.Printf("map中共有%d个互不相同的元素\n%v\n", len(m), m)
@@ -27,7 +27,7 @@ func zy1() {
 func zy2(arr []int) string {
 	sb := strings.Builder{}
 	for k, v := range arr {
-		if (len(arr) - 1) == k { //当取到最后一个index，不添加空格
+		if (len(arr) - 1) == k {
 			sb.WriteString(strconv.Itoa(v))
 		} else {
 			sb.WriteString(strconv.Itoa(v))
