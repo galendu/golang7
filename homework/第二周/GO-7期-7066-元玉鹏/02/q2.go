@@ -2,7 +2,6 @@
 package q2
 
 import (
-	"fmt"
 	"strconv"
 	"strings"
 )
@@ -25,6 +24,6 @@ func arr2string(arr []int, sep string) string {
 
 // Public arr2string
 func Array2String(arr []int, sep string) string {
-	fmt.Println(arr2string(arr, sep))
+	// fmt.Println(arr2string(arr, sep))
 	return arr2string(arr, sep)
 }
