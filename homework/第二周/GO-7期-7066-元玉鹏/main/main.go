@@ -7,6 +7,6 @@ import (
         
 
 func main() {
-	q1.Q1(100)
-  q2.Array2String([]int{2,3,4,5,6}, " ")
+    q1.Q1(100)
+    q2.Array2String([]int{2,3,4,5,6}, " ")
 }
