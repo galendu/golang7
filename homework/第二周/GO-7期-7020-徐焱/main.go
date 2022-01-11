@@ -21,7 +21,7 @@ func zy1() {
 		m[y] = k //将sli的值指定为map的index，因为index不能重复，若重复则追加
 	}
 
-	fmt.Printf("map中共有%d个互不相同的元素\n%v\n", len(m), m)
+	fmt.Printf("map共有%d个互不相同的元素\n%v\n", len(m), m)
 }
 
 func zy2(arr []int) string {
