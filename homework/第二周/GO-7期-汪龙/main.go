@@ -19,15 +19,12 @@ func slice_Sum() {
 		v, ok := mapSlice[ele]
 		if ok {
 			mapSlice[ele] = v + 1
-
 		} else {
 			mapSlice[ele] = 1
 		}
 	}
 	fmt.Printf("切片里有%d个互不相同的元素\n", len(mapSlice))
-
 }
-
 // 2. 实现一个函数func arr2string(arr []int) string，比如输入[]int{2,4,6}，返回“2 4 6”。输入的切片可能很短，也可能很长。
 func arr2String(arr []int) string {
 	sb := strings.Builder{}
@@ -41,7 +38,6 @@ func arr2String(arr []int) string {
 		}
 	}
 	return sb.String()
-
 }
 
 func main() {
