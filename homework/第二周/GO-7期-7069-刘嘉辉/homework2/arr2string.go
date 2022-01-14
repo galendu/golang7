@@ -21,4 +21,13 @@ func Arr2string(arr []int) string {
 	return strings.Join(str, " ")
 }
 
-//输出
+//func strings.Builder
+func Arr2string2(arr []int) string{
+    str := strings.Builder{}
+    for _, ele := range arr {
+		//strings.Builder
+		str.WriteString(fmt.Sprint(strconv.Itoa(ele)))
+        str.WriteString(" ")
+	}
+    return str
+}
