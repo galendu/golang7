@@ -63,3 +63,6 @@ func main() {
 	//slcS:=slcString(input)
 	//fmt.Printf("type:%T value:%#v\n",slcS,slcS)
 }
+
+// 建议格式化输出
+// 第二题要考虑处理输出结果末尾的空格

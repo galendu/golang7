@@ -45,3 +45,5 @@ func main() {
 	arr := arr1string([]int{1, 2, 3, 5})
 	fmt.Println(arr)
 }
+
+// 整体逻辑正确，第一题建议判断map中的key是否存在，并格式化输出

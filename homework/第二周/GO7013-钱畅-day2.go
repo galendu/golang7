@@ -55,3 +55,6 @@ func main() {
 	fmt.Printf("str=%s\n", mystr)
 
 }
+
+// 第一题未实现题目要求
+// 第二题要考虑处理输出末尾的空格

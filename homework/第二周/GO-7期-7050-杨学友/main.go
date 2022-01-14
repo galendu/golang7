@@ -47,3 +47,5 @@ func main() {
 	result := arr2string(s)
 	fmt.Println(result)
 }
+
+// 整体完成的不错，仅第一题未实现要求

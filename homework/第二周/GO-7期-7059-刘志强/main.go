@@ -57,3 +57,6 @@ func main() {
 	fmt.Printf("arr2string(arr3)==%v\n", arr2string(arr3))
 	fmt.Printf("arr2string(nil)==%v\n", arr2string(nil))
 }
+
+// 第一题建议判断map中的key是否存在，并格式化输出
+// 第二题输出可以优化下

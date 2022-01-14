@@ -25,6 +25,7 @@ func slice_Sum() {
 	}
 	fmt.Printf("切片里有%d个互不相同的元素\n", len(mapSlice))
 }
+
 // 2. 实现一个函数func arr2string(arr []int) string，比如输入[]int{2,4,6}，返回“2 4 6”。输入的切片可能很短，也可能很长。
 func arr2String(arr []int) string {
 	sb := strings.Builder{}
@@ -46,3 +47,5 @@ func main() {
 	str := arr2String(arr)
 	fmt.Println(str)
 }
+
+// 完成的不错，第一题想到了判断key是否存在，第二题想到了处理最后一个元素
