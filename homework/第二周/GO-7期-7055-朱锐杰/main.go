@@ -52,3 +52,6 @@ func main() {
 	arry := []int{2, 4, 6, 8, 10, 12}
 	fmt.Printf("%s", arr2string(arry))
 }
+
+// 第一个可以简化下输出
+// 第二题输出可以考虑下去掉末尾的%

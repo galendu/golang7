@@ -13,33 +13,32 @@ import (
 	利用map统计该切片里有多少个互不相同的元素。
 */
 
-func total()  {
+func total() {
 	// 定义一个len=0，cap=10的int类型的slice
-	intSlice := make([]int,0,10)
+	intSlice := make([]int, 0, 10)
 	// 调用rand.Intn()函数一百次
 	for i := 0; i < 100; i++ {
-		intSlice = append(intSlice,rand.Intn(128))
+		intSlice = append(intSlice, rand.Intn(128))
 	}
 	//fmt.Println(int_Slice)
 
 	// 定义一个map[int]bool
 	totalMap := make(map[int]bool)
 	// 利用map的key的唯一性来排除slice中相同元素
-	for _,v := range intSlice {
+	for _, v := range intSlice {
 		totalMap[v] = false
 	}
 	//fmt.Println(totalMap)
 
-	sum:=len(totalMap)
-	fmt.Printf("该切片里有%d个互不相同的元素\n",sum)
+	sum := len(totalMap)
+	fmt.Printf("该切片里有%d个互不相同的元素\n", sum)
 
 }
-
 
 /*
 	2. 实现一个函数func arr2string(arr []int) string，
 	比如输入[]int{2,4,6}，返回“2 4 6”。输入的切片可能很短，也可能很长。
- */
+*/
 
 func arr2string(arr []int) string {
 	sb := strings.Builder{}
@@ -48,7 +47,7 @@ func arr2string(arr []int) string {
 		str := strconv.Itoa(arr[i])
 		sb.WriteString(str)
 		// 判断是否是最后一个字符。如果是，则字符串末尾不加" "
-		if i != len(arr) - 1 {
+		if i != len(arr)-1 {
 			sb.WriteString(" ")
 		}
 	}
@@ -62,11 +61,13 @@ func arr2string(arr []int) string {
 	return merged
 }
 
-func main()  {
+func main() {
 	total()
 
-	var arr = []int{3,4,6}
+	var arr = []int{3, 4, 6}
 	str := arr2string(arr)
 	//fmt.Println(len(str))
 	fmt.Println(str)
 }
+
+// 第一题建议使用判断map中是否存在key的方式

@@ -54,3 +54,6 @@ func main() {
 	fmt.Println(arr2string(arr))
 
 }
+
+// 可以考虑将切片作为参数传递给wcslice并可以修改相对逻辑
+// arr2string结果会多一个空格，可以考虑把末尾多处的空格去掉

@@ -36,3 +36,6 @@ func main() {
 	f1()
 	fmt.Printf("%#v", arr2string([]int{2, 4, 6}))
 }
+
+// 第一题使用判断map的key是否存在的方式
+// 第二题可以考虑去掉头尾的“以及输出的%

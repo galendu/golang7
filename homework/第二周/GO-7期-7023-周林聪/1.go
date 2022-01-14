@@ -66,3 +66,5 @@ func main() {
 	// arr2string(arr3)==2 4
 	// arr2string(nil)==
 }
+
+// 只输出要求的结果即可

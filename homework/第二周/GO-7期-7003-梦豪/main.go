@@ -52,3 +52,5 @@ func main() {
 	str := arr2String(arr)
 	fmt.Println(str)
 }
+
+// 完成的不错，并且第二题考虑到去掉末尾的空格

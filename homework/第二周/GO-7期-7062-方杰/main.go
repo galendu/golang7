@@ -58,3 +58,6 @@ func main() {
 	str := arr2string(slice)
 	fmt.Printf("[%s]\n", str)
 }
+
+// 第一题建议使用判断map中是否存在key的方式
+// 第二题结果不是要求的，可以更改下

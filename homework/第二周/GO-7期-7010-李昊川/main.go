@@ -40,3 +40,5 @@ func main() {
 	}
 	fmt.Println(arr2string(arr))
 }
+
+// 整体来说不错，可以加一个判断map中是否已经存在相应的key

@@ -13,16 +13,16 @@ func getCount(s []int) (int, int) {
 	m = make(map[int]int, 100)
 
 	for _, ele := range s {
-		if _, exists := m[ele]; exists{
+		if _, exists := m[ele]; exists {
 			m[ele] += 1
-		}else {
+		} else {
 			m[ele] = 1
 		}
 	}
 
 	s1 := make([]int, 0, 100)
-	for key, value := range m{
-		if value == 1{
+	for key, value := range m {
+		if value == 1 {
 			s1 = append(s1, key)
 		}
 	}
@@ -30,11 +30,10 @@ func getCount(s []int) (int, int) {
 	return len(m), len(s1)
 }
 
-
-func arr2string(arr []int) string{
+func arr2string(arr []int) string {
 	sb := strings.Builder{}
 
-	for _, ele := range arr{
+	for _, ele := range arr {
 		var s string = strconv.Itoa(ele)
 		sb.WriteString(s)
 		sb.WriteString(" ")
@@ -42,7 +41,6 @@ func arr2string(arr []int) string{
 	mergedSb := sb.String()
 	return mergedSb
 }
-
 
 func main() {
 	fmt.Print("---获取切片中互不相同的元素个数---\n")
@@ -66,3 +64,6 @@ func main() {
 	fmt.Printf("原切片：%v \n转化为字符串后：%s\n", s, stringArr2)
 
 }
+
+// 可以将功能写成函数，在main函数里进行调用
+// 只输出要求即可

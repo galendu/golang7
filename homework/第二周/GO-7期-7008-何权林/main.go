@@ -47,3 +47,7 @@ func main() {
     arrStr := arr2string(arr)
     fmt.Printf("arr: %v, arrStr: %v\n", arr, arrStr)
 }
+
+// 这种情况不需要提交go.mod 作业.txt这两个问题，只需要提交作业就行
+// 第一题重新实现下
+// 第二题考虑下在遍历的时候就实现去掉多余的空格

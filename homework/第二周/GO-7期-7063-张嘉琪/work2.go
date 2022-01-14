@@ -69,3 +69,6 @@ func main() {
 	fmt.Printf("arr2string([]int{2,4,6})=%s", arr2string([]int{2, 4, 6}))
 
 }
+
+// 第一题可以像第二题一样，写成一个函数，在main函数进行调用，并建议使用判断map中是否存在key的方式
+// 第二题想下怎么去掉末尾的空格
