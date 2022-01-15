@@ -234,6 +234,13 @@ func expansion() {
 	}
 }
 ```
+```Go
+arr := make([]int, 3, 5)
+brr := append(arr, 8) //arr和brr共享底层数组，但它们的len不同
+```
+
+<img src=img/append.png width=700 />
+
 &#8195;&#8195;通过指定起止下标，可以从大切片中截取一个子切片。  
 ```Go
 s := make([]int, 3, 5)	//len=3, cap=5
