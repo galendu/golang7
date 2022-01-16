@@ -123,6 +123,11 @@ export PATH=$PATH:$GOROOT/bin: :$GOPATH/bin
 
 ![avatar](img/设置go环境变量4.png)  
 
+&#8195;&#8195;在Windows下还可以通过go env -w来设置环境变量，比如设置GOPROXY用以下命令
+```Shell
+go env -w GOPROXY=https://goproxy.cn,direct 
+```
+
 &#8195;&#8195;有很多网站支持在线编辑Go代码并查看运行结果，这里列举一些  
 https://play.golang.wiki  
 https://play.studygolang.com  
