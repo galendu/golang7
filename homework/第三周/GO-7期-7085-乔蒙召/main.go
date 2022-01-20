@@ -6,7 +6,6 @@ import (
 	"time"
 )
 
-
 func SumMatrix(a [8][5]int, b [8][5]int) [8][5]int {
 	c := [8][5]int{}
 	for i := 0; i < 8; i++ {
@@ -40,6 +39,7 @@ func PrintArr(arr [8][5]int) {
 }
 
 type month = int
+
 func GetSeasonIf(m month) {
 	if m <= 0 {
 		fmt.Printf("month error!\n")
@@ -56,7 +56,7 @@ func GetSeasonIf(m month) {
 	}
 }
 
-func GetSeasonSwitch1(m month){
+func GetSeasonSwitch1(m month) {
 	switch m {
 	case 1:
 		fmt.Printf("Spring.\n")
@@ -87,17 +87,17 @@ func GetSeasonSwitch1(m month){
 	}
 }
 
-func GetSeasonSwitch2(m month){
+func GetSeasonSwitch2(m month) {
 	switch {
-	case m<=0:
+	case m <= 0:
 		fmt.Printf("month error!\n")
-	case m<=3:
+	case m <= 3:
 		fmt.Printf("Spring.\n")
-	case m<=6:
+	case m <= 6:
 		fmt.Printf("Summer.\n")
-	case m<=9:
+	case m <= 9:
 		fmt.Printf("Autumn.\n")
-	case m<=12:
+	case m <= 12:
 		fmt.Printf("Winter.\n")
 	default:
 		fmt.Printf("month error!\n")
@@ -105,55 +105,56 @@ func GetSeasonSwitch2(m month){
 }
 
 type student struct {
-	name string
+	name    string
 	chinese int
-	math int
+	math    int
 	english int
-	avg float32
+	avg     float32
 }
 
 //初始化班级成员及成绩信息
-func InitSlice() []student{
+func InitSlice() []student {
 	// s:="ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-	s:="ABCDEFG" //HIJKLMNOPQRSTUVWXYZ"
+	s := "ABCDEFG" //HIJKLMNOPQRSTUVWXYZ"
 	stusinfo := make([]student, 0, len(s))
-	for i:=0; i<len(s); i++{
-		stu_name:=string(s[i])
-		stu_chinese:=rand.Intn(100+1)
-		stu_math:=rand.Intn(100+1)
-		stu_english:=rand.Intn(100+1)
-		stu_avg:=float32(stu_chinese+stu_math+stu_english)/3
-		info:=student{name:stu_name, chinese: stu_chinese, math: stu_math, english: stu_english, avg: stu_avg}
+	for i := 0; i < len(s); i++ {
+		stu_name := string(s[i])
+		stu_chinese := rand.Intn(100 + 1)
+		stu_math := rand.Intn(100 + 1)
+		stu_english := rand.Intn(100 + 1)
+		stu_avg := float32(stu_chinese+stu_math+stu_english) / 3
+		info := student{name: stu_name, chinese: stu_chinese, math: stu_math, english: stu_english, avg: stu_avg}
 		stusinfo = append(stusinfo, info)
 	}
 	return stusinfo
 }
 
 //统计班级成员信息
-type classinfo struct{
-	stusinfo []student
+type classinfo struct {
+	stusinfo    []student
 	avg_chinese float32
-	avg_math float32
+	avg_math    float32
 	avg_english float32
-	avgnopass int
+	avgnopass   int
 }
-func StatStusinfo(stusinfo []student){
+
+func StatStusinfo(stusinfo []student) {
 	var total_chinese, total_math, total_english int
 	var avgnopass int
-	for _,info := range stusinfo{
+	for _, info := range stusinfo {
 		total_chinese += info.chinese
 		total_math += info.math
 		total_english += info.english
-		if info.avg < 60{
+		if info.avg < 60 {
 			avgnopass++
 		}
 	}
-	avg_chinese:=float32(total_chinese)/float32(len(stusinfo))
-	avg_math:=float32(total_math)/float32(len(stusinfo))
-	avg_english:=float32(total_english)/float32(len(stusinfo))
-	clsinfo:=classinfo{stusinfo: stusinfo, avg_chinese: avg_chinese, avg_math: avg_math, avg_english: avg_english, avgnopass: avgnopass}
+	avg_chinese := float32(total_chinese) / float32(len(stusinfo))
+	avg_math := float32(total_math) / float32(len(stusinfo))
+	avg_english := float32(total_english) / float32(len(stusinfo))
+	clsinfo := classinfo{stusinfo: stusinfo, avg_chinese: avg_chinese, avg_math: avg_math, avg_english: avg_english, avgnopass: avgnopass}
 
-	for _, info:=range clsinfo.stusinfo{
+	for _, info := range clsinfo.stusinfo {
 		fmt.Printf("name: %s, chinese: %d, math: %d, english: %d, avg: %.2f\n", info.name, info.chinese, info.math, info.english, info.avg)
 	}
 	fmt.Printf("avg_chinese: %.2f, avg_math: %.2f, avg_english: %.2f, avgnopass: %d\n", clsinfo.avg_chinese, clsinfo.avg_math, clsinfo.avg_english, clsinfo.avgnopass)
@@ -182,9 +183,9 @@ func main() {
 
 	//3
 	fmt.Printf("作业3\n")
-	stusinfo:=InitSlice()
+	stusinfo := InitSlice()
 	fmt.Printf("班级成员及成绩信息\n")
-	for _, info := range stusinfo{
+	for _, info := range stusinfo {
 		fmt.Printf("name: %s, chinese: %d, math: %d, english: %d\n", info.name, info.chinese, info.math, info.english)
 	}
 	fmt.Println()
