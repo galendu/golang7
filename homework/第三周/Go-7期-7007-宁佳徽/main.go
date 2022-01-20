@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"math/rand"
+	"strconv"
+	"time"
 )
 
 /*
@@ -14,22 +16,13 @@ func matrixSummation() {
 		WIDTH = 5
 	)
 	A := [LONG][WIDTH]int{}
+	B := [LONG][WIDTH]int{}
+	rect := [LONG][WIDTH]int{}
+
 	for i := 0; i < LONG; i++ {
 		for j := 0; j < WIDTH; j++ {
 			A[i][j] = rand.Intn(1000)
-		}
-	}
-
-	B := [LONG][WIDTH]int{}
-	for i := 0; i < LONG; i++ {
-		for j := 0; j < WIDTH; j++ {
 			B[i][j] = rand.Intn(1000)
-		}
-	}
-
-	rect := [LONG][WIDTH]int{}
-	for i := 0; i < LONG; i++ {
-		for j := 0; j < WIDTH; j++ {
 			rect[i][j] = A[i][j] + B[i][j]
 		}
 	}
@@ -90,27 +83,34 @@ type student struct {
 
 func (s student) average() float64 {
 	average := s.chinese + s.math + s.english
-	return average
+	return average / float64(3)
 }
 
-func getClassAverage(s []student) {
-
-	var personAverage, classAverage, chinese, math, english float64
+func getClassAverage1(s int) { //s指定生成多少个学生
+	var classAverage, chinese, math, english float64
 	var sum int
-	for i := 0; i < len(s); i++ { //遍历slice
-		a := s[i]
-		personAverage = a.average() / float64(3)
-		fmt.Printf("%s的平均分是%g\n", a.name, personAverage)
-		if personAverage < 60 {
+	class := make([]student, s)
+
+	for i := 0; i < s; i++ { //遍历slice
+		a := student{}
+		a.name = strconv.Itoa(i) + "a"
+		rand.Seed(time.Now().UnixNano())
+		a.chinese = float64(rand.Intn(80) + 20)
+		a.math = float64(rand.Intn(80) + 20)
+		a.english = float64(rand.Intn(80) + 20)
+		class = append(class, a)
+
+		fmt.Printf("%s的平均分是%g\n", a.name, a.average())
+		if a.average() < 60 {
 			sum = sum + 1
 		}
 		chinese += a.chinese
 		math += a.math
 		english += a.english
-		classAverage += personAverage
+		classAverage += a.average()
 	}
 
-	fmt.Printf("全班语文平均分：%g,全班数学平均分：%g,全班英语平均分：%g,全班总分平均分：%g,平均分低于60分的有%d\n个", chinese/float64(len(s)), math/float64(len(s)), english/float64(len(s)), classAverage/float64(len(s)), sum)
+	fmt.Printf("全班语文平均分：%g,全班数学平均分：%g,全班英语平均分：%g,全班总分平均分：%g,平均分低于60分的有%d个\n", chinese/float64(s), math/float64(s), english/float64(s), classAverage/float64(s), sum)
 
 }
 
@@ -121,16 +121,6 @@ func main() {
 	switchSeason(-1)
 	switchSeason(5)
 
-	class := []student{}
-	a := student{name: "a", chinese: 80.0, math: 42, english: 12}
-	b := student{name: "b", chinese: 86.0, math: 15, english: 42}
-	c := student{name: "c", chinese: 10.0, math: 50, english: 34}
-	d := student{name: "d", chinese: 60.0, math: 46, english: 53}
-	e := student{name: "e", chinese: 72.0, math: 37, english: 63}
-	f := student{name: "f", chinese: 41.0, math: 17, english: 38}
-	g := student{name: "g", chinese: 50.0, math: 92, english: 96}
-	h := student{name: "h", chinese: 86.0, math: 15, english: 70}
-	class = append(class, a, b, c, d, e, f, g, h)
-	getClassAverage(class)
+	getClassAverage1(20)
 
 }
