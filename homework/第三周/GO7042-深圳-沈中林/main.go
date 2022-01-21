@@ -11,14 +11,14 @@ import (
 
 // JudMonth 2.给定月份，判断属于哪个季节。分别用if和switch实现
 func JudMonth(month int) (season string, err error) {
-	switch {
-	case month > 0 && month <= 3:
+	switch month {
+	case 1,2,3:
 		season = "Spring"
-	case month >= 4 && month <= 6:
+	case 4,5,6:
 		season = "Summer"
-	case month >= 7 && month <= 9:
+	case 7,8,9:
 		season = "Autumn"
-	case month >= 10 && month <= 12:
+	case 10,11,12:
 		season = "Winter"
 	default:
 		season = "null"
@@ -73,6 +73,7 @@ func MakeKeyword() (keyword string) {
 }
 
 func main() {
+	// jud month
 	jm, err := JudMonth(1)
 	if err != nil {
 		fmt.Println("err::", err)
@@ -81,15 +82,31 @@ func main() {
 	}
 
 	moc := MakeOneClass()
-	var onenum, totalnum int
+	var onenum, langtotal, mathtotal, engtotal int
+	var unlod int
 	for _, v := range moc {
-		// 每个人的
+		// student
 		onenum = v.ComputeAvgStudent()
+		if onenum < 60 {
+			unlod = unlod + 1
+		}
+		// student avg
 		fmt.Printf("stuend %s avg :: %d \n", v.UserName, onenum)
-		// 整个班级
-		totalnum = totalnum + v.ComputeSumStudent()
+
+		// stuends
+		langtotal = langtotal + v.Language
+		mathtotal = mathtotal + v.Mathematics
+		engtotal = engtotal + v.English
 	}
-	fmt.Printf("stuends avg :: %d \n", totalnum/len(moc))
+
+	// stuends < 60
+	fmt.Printf("stuends < 60 :: %d \n", unlod)
+	// students avg for lang
+	fmt.Printf("stuends Language avg :: %d \n", langtotal/len(moc))
+	// students avg for math
+	fmt.Printf("stuends Mathematics avg :: %d \n", mathtotal/len(moc))
+	// students avg for eng
+	fmt.Printf("stuends English avg :: %d \n", engtotal/len(moc))
 
 }
 
