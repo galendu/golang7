@@ -90,8 +90,8 @@ func three(stu []student) (map[string]float64, map[string]float64) {
 		sumenglish += value.english
 		summath += value.math
 		mapsub["langavg"] = sumlang / float64(index+1)
-		mapsub["englishavg"] = sumlang / float64(index+1)
-		mapsub["mathavg"] = sumlang / float64(index+1)
+		mapsub["englishavg"] = sumenglish / float64(index+1)
+		mapsub["mathavg"] = summath / float64(index+1)
 	}
 	//println("%d", stuavg)
 	return mapstu, mapsub
