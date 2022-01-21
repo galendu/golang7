@@ -103,10 +103,15 @@ func main() {
 	two2(5)
 	slicestu := []student{{"yi", 20, 40, 90}, {"er", 20, 50, 100}, {"san", 10, 20, 80}, {"si", 30, 70, 90}, {"wu", 20, 50, 70}, {"liu", 15, 35, 95}}
 	m1, m2 := three(slicestu)
+	lowcount := 0
 	for key, value := range m1 {
+		if value < 60 {
+			lowcount += 1
+		}
 		fmt.Printf("%v=%v\t", key, value)
 	}
 	fmt.Println()
+	fmt.Printf("不及格人数%d\n", lowcount)
 	for key, value := range m2 {
 		fmt.Printf("%v=%v\t", key, value)
 	}
