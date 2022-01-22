@@ -15,7 +15,13 @@ func statistics_slice(n int) {
 	for i := 0; i < n; i++ {
 		num := rand.Intn(128)      // 获取随机数
 		slice = append(slice, num) // 写入slice
-		m[num] += 1                // 通过每次的随机数做key，每取到一次对应的value + 1
+		//m[num] += 1                // 通过每次的随机数做key，每取到一次对应的value + 1
+		// 通过判断key是否存在实现
+		if _, ok := m[num]; ok {
+			m[num] += 1
+		} else {
+			m[num] = 1
+		}
 	}
 
 	fmt.Printf("There are %d different elements in the slice.\n", len(m)) // map的len就是不同数值出现的次数
@@ -56,7 +62,7 @@ func main() {
 	//slice := make([]int, 0)
 	//str := arr2string(nil)
 	str := arr2string(slice)
-	fmt.Printf("[%s]\n", str)
+	fmt.Printf("%s\n", str)
 }
 
 // 第一题建议使用判断map中是否存在key的方式
