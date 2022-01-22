@@ -92,42 +92,26 @@ func MatrixSum(arr1, arr2 [ROW][COL]int) [ROW][COL]int {
 }
 
 func Searson(month int) {
-	if month == 2 {
+	if month >= 3 && month <= 5 {
 		fmt.Printf("%d月是春天!\n", month)
-	} else if month == 3 {
-		fmt.Printf("%d月是春天!\n", month)
-	} else if month == 4 {
-		fmt.Printf("%d月是春天!\n", month)
-	} else if month == 5 {
+	} else if month >= 6 && month <= 8 {
 		fmt.Printf("%d月是夏天!\n", month)
-	} else if month == 6 {
-		fmt.Printf("%d月是夏天!\n", month)
-	} else if month == 7 {
-		fmt.Printf("%d月是夏天!\n", month)
-	} else if month == 8 {
+	} else if month >= 9 && month <= 11 {
 		fmt.Printf("%d月是秋天!\n", month)
-	} else if month == 9 {
-		fmt.Printf("%d月是秋天!\n", month)
-	} else if month == 10 {
-		fmt.Printf("%d月是秋天!\n", month)
-	} else if month == 11 {
-		fmt.Printf("%d月是冬天!\n", month)
-	} else if month == 12 {
-		fmt.Printf("%d月是冬天!\n", month)
-	} else if month == 1 {
+	} else if month == 12 || (month >= 1 && month <= 2) {
 		fmt.Printf("%d月是冬天!\n", month)
 	} else {
 		fmt.Println("月份不对，请传入正确的月份!")
 	}
 
 	switch month {
-	case 2, 3, 4:
+	case 3, 4, 5:
 		fmt.Printf("%d月是春天!\n", month)
-	case 5, 6, 7:
+	case 6, 7, 8:
 		fmt.Printf("%d月是夏天!\n", month)
-	case 8, 9, 10:
+	case 9, 10, 11:
 		fmt.Printf("%d月是秋天!\n", month)
-	case 1, 11, 12:
+	case 1, 2, 12:
 		fmt.Printf("%d月是冬天!\n", month)
 	default:
 		fmt.Println("月份不对，请传入正确的月份!")
@@ -178,7 +162,7 @@ func main() {
 	fmt.Println("-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-")
 
 	// 2. 根据月份判断季节
-	month := 12
+	month := 2
 	Searson(month)
 
 	fmt.Println("-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-")
