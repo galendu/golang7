@@ -22,7 +22,6 @@ func ComputeMulIncr(num ...float64) func() (float64, error) {
 	cpMulIcr := 1.0
 
 	return func() (float64, error) {
-		fmt.Println("-------", num)
 		for _, v := range num {
 			cpMulIcr *= v
 		}
@@ -35,44 +34,44 @@ func ComputeMulIncr(num ...float64) func() (float64, error) {
 
 // 3.定义两个接口：鱼类和爬行动物，再定义一个结构体：青蛙，同时实现上述两个接口
 type Fish interface {
-	Swimming(name string)
+	Swimming(swimming_pool string)
 }
 
 type Cat interface {
-	Jumping(name string)
+	Jumping(place string)
 }
 
 type Animal interface {
-	Eating(name string)
+	Eating(food string)
 	Fish
 	Cat
 }
 
 type Frog struct {
+	Name string
 	City string
 }
 
-func (f *Frog) Eating(name string) {
-	fmt.Printf("Frog %s is eating in %s \n", name, f.City)
+func (f *Frog) Eating(food string) {
+	fmt.Printf("The %s Frog %s is eating food %s \n", f.City, f.Name, food)
 }
 
-func (f *Frog) Swimming(name string) {
-	fmt.Printf("Frog %s is swimming in %s \n", name, f.City)
+func (f *Frog) Swimming(place string) {
+	fmt.Printf("The %s Frog %s is swimming in %s \n", f.City, f.Name, place)
 }
 
-func (f *Frog) Jumping(name string) {
-	fmt.Printf("Frog %s is jumping in %s \n", name, f.City)
+func (f *Frog) Jumping(swimming_pool string) {
+	fmt.Printf("The %s Frog %s is jumping in %s \n", f.City, f.Name, swimming_pool)
 }
 
-func animalMethod(name string, ani Animal) {
-	ani.Eating(name)
-	ani.Jumping(name)
-	ani.Swimming(name)
+func AnimalMethod(ani Animal, food, place, swimming_pool string) {
+	ani.Eating(food)
+	ani.Jumping(place)
+	ani.Swimming(swimming_pool)
 }
 
 // 4.实现函数func square(num interface{}) interface{}，计算一个interface{}的平方，interface{}允许是4种类型：float32、float64、int、byte
 func Square(num interface{}) interface{} {
-
 	switch num.(type) {
 	case float32:
 		return num.(float32) * num.(float32)
@@ -112,9 +111,10 @@ func main() {
 
 	// 3
 	Tom := &Frog{
+		Name: "Tom",
 		City: "bg",
 	}
-	animalMethod("Tom", Tom)
+	AnimalMethod(Tom, "worm", "jd", "bg")
 
 	// 4
 	var a float32 = 12
