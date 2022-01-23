@@ -33,18 +33,18 @@ func ComputeMulIncr(num ...float64) func() (float64, error) {
 }
 
 // 3.定义两个接口：鱼类和爬行动物，再定义一个结构体：青蛙，同时实现上述两个接口
-type Fish interface {
-	Swimming(swimming_pool string)
+type Fisher interface {
+	Swimming(swimmingPool string)
 }
 
-type Cat interface {
+type Cater interface {
 	Jumping(place string)
 }
 
-type Animal interface {
+type Animaler interface {
 	Eating(food string)
-	Fish
-	Cat
+	Fisher
+	Cater
 }
 
 type Frog struct {
@@ -60,14 +60,14 @@ func (f *Frog) Swimming(place string) {
 	fmt.Printf("The %s Frog %s is swimming in %s \n", f.City, f.Name, place)
 }
 
-func (f *Frog) Jumping(swimming_pool string) {
-	fmt.Printf("The %s Frog %s is jumping in %s \n", f.City, f.Name, swimming_pool)
+func (f *Frog) Jumping(swimmingPool string) {
+	fmt.Printf("The %s Frog %s is jumping in %s \n", f.City, f.Name, swimmingPool)
 }
 
-func AnimalMethod(ani Animal, food, place, swimming_pool string) {
+func AnimalMethod(ani Animaler, food, place, swimmingPool string) {
 	ani.Eating(food)
 	ani.Jumping(place)
-	ani.Swimming(swimming_pool)
+	ani.Swimming(swimmingPool)
 }
 
 // 4.实现函数func square(num interface{}) interface{}，计算一个interface{}的平方，interface{}允许是4种类型：float32、float64、int、byte
@@ -95,7 +95,7 @@ func main() {
 	}
 
 	// 2
-	cpMulIncrFunc := ComputeMulIncr(1, 2.0, 4.0)
+	cpMulIncrFunc := ComputeMulIncr(1, 0, 4.0)
 	if cpMulIncr, err := cpMulIncrFunc(); err != nil {
 		fmt.Println("error: ", err)
 	} else {
