@@ -84,9 +84,7 @@ func Square(num interface{}) interface{} {
 	default:
 		return "num type must be float32、float64、int、byte"
 	}
-
 }
-
 
 func main() {
 	// 1
