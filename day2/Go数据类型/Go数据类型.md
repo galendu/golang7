@@ -187,7 +187,7 @@ type slice struct {
     cap int 
 }
 ```
-![avatar](img/array.png)   
+![avatar](img/slice.png)   
 
 切片的初始化
 ```Go
@@ -302,6 +302,15 @@ s := []int{1, 2, 3}
 update_slice(s)
 fmt.Printf("s=%v\n", s)
 ```
+```Go
+s := make([]int, 2, 3)
+fmt.Printf("address of slice %p, address of array %p %p\n", &s, &s[0], s)
+s = append(s, 4)
+fmt.Printf("address of slice %p, address of array %p %p\n", &s, &s[0], s)
+s = append(s, 4)
+fmt.Printf("address of slice %p, address of array %p %p\n", &s, &s[0], s)
+```
+&#8195;&#8195;获取切片的地址用&s；获取切片底层数组的地址用&s[0]，或直接把s当地址打印。  
 ## 字符串
 &#8195;&#8195;字符串里可以包含任意Unicode字符。
 ```Go
