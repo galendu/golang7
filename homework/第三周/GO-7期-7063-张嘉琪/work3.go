@@ -176,3 +176,6 @@ func main() {
 	//统计不及格学生的数量
 	fmt.Printf("不及格学生数为:%d", getFailStudent(sv))
 }
+
+// 第一题未实现题意要求
+// 

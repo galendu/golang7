@@ -34,14 +34,14 @@ func SumOfMatrix() {
 	SumMatrix := [a][b]float64{}
 	for i := 0; i < len(SumMatrix); i++ {
 		for j := 0; j < len(SumMatrix[0]); j++ {
-			sum:=MatrixA[i][j]+MatrixB[i][j]
-			SumMatrix[i][j]=sum
+			sum := MatrixA[i][j] + MatrixB[i][j]
+			SumMatrix[i][j] = sum
 		}
 	}
 
 	for i := 0; i < a; i++ {
 		for j := 0; j < b; j++ {
-			fmt.Printf("SumMatrix[%d][%d]=%f\n", i,j,SumMatrix[i][j])
+			fmt.Printf("SumMatrix[%d][%d]=%f\n", i, j, SumMatrix[i][j])
 		}
 	}
 }
@@ -89,64 +89,63 @@ func JudgeSeasonWithSwatch(x int) {
 
 //创建学生数据结构体
 type Student struct {
-	Name string
-	ChineseScore 	int
-	MathScore	int
-	EnglishScore	int
-	average float32
+	Name         string
+	ChineseScore int
+	MathScore    int
+	EnglishScore int
+	average      float32
 }
 
-func average(n int)  {
+func average(n int) {
 	//创建学科数据
-	var stuSlice  []Student
+	var stuSlice []Student
 	//var stuMap = map[int]Student{}
 	var stu Student
 	rand.Seed(time.Now().Unix())
-	for i:=0;i<n;i++ {
-		stu.Name = "student_"+strconv.Itoa(i+1)
+	for i := 0; i < n; i++ {
+		stu.Name = "student_" + strconv.Itoa(i+1)
 		stu.ChineseScore = rand.Intn(100)
 		stu.MathScore = rand.Intn(100)
 		stu.EnglishScore = rand.Intn(100)
-		fmt.Println("输出结构体数据：\n",stu)
+		fmt.Println("输出结构体数据：\n", stu)
 		//if _,ok := stuMap[i];!ok{
 		//	stuMap[i] = stu
 		//}
-		stuSlice = append(stuSlice,stu)
+		stuSlice = append(stuSlice, stu)
 	}
 
 	//输出结构体数据
-	fmt.Println("输出切片结构体数据：",stuSlice)
+	fmt.Println("输出切片结构体数据：", stuSlice)
 	//fmt.Println("输出map结构体数据：",stuMap)
 
 	//获取同学平均分和三科平均分
-	var chineseAverageScore,mathAverageScore,englishAverageScore float32
-	var chineseTotalScore,mathTotalScore,englishTotalScore =0,0,0
+	var chineseAverageScore, mathAverageScore, englishAverageScore float32
+	var chineseTotalScore, mathTotalScore, englishTotalScore = 0, 0, 0
 	var peopleTotal = len(stuSlice)
 	var notPass60 = 0
-	for i:=0;i<len(stuSlice);i++ {
+	for i := 0; i < len(stuSlice); i++ {
 		chineseTotalScore += stuSlice[i].ChineseScore
 		mathTotalScore += stuSlice[i].MathScore
 		englishTotalScore += stuSlice[i].EnglishScore
 		//获取平均分
-		stuSlice[i].average = float32((stuSlice[i].ChineseScore + stuSlice[i].MathScore + stuSlice[i].EnglishScore)/3)
+		stuSlice[i].average = float32((stuSlice[i].ChineseScore + stuSlice[i].MathScore + stuSlice[i].EnglishScore) / 3)
 		//获取平均分未及格人数
-		if stuSlice[i].average <60 {
+		if stuSlice[i].average < 60 {
 			notPass60++
 		}
 	}
 	//获取科目平均分
-	chineseAverageScore = float32(chineseTotalScore/peopleTotal)
-	mathAverageScore = float32(mathTotalScore/peopleTotal)
-	englishAverageScore = float32(englishTotalScore/peopleTotal)
+	chineseAverageScore = float32(chineseTotalScore / peopleTotal)
+	mathAverageScore = float32(mathTotalScore / peopleTotal)
+	englishAverageScore = float32(englishTotalScore / peopleTotal)
 
-	fmt.Println("输出切片结构体数据(包含平均分)：",stuSlice)
-	fmt.Println("平均分未达到60分同学数：",notPass60)
-	fmt.Printf("Chinese:%.1f\n",chineseAverageScore)
-	fmt.Printf("Math:%.1f\n",mathAverageScore)
-	fmt.Printf("English:%.1f\n",englishAverageScore)
+	fmt.Println("输出切片结构体数据(包含平均分)：", stuSlice)
+	fmt.Println("平均分未达到60分同学数：", notPass60)
+	fmt.Printf("Chinese:%.1f\n", chineseAverageScore)
+	fmt.Printf("Math:%.1f\n", mathAverageScore)
+	fmt.Printf("English:%.1f\n", englishAverageScore)
 
 }
-
 
 func main() {
 	SumOfMatrix()
@@ -157,3 +156,7 @@ func main() {
 
 	average(5)
 }
+
+// 第一题可以实现一方方法函数生成矩阵
+// 第二题代码switch实现方式需要复习下知识点
+// 输出进行优化下

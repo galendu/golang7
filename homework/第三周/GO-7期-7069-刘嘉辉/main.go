@@ -39,3 +39,5 @@ func main() {
 	homework3.PrintSubjectAverage("english")
 	homework3.PrintSubjectAverage("oringe")
 }
+
+// 整体逻辑是正确的，不过第二题优化下判断逻辑，让条件更清晰些

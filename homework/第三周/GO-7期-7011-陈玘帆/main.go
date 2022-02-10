@@ -7,15 +7,15 @@ import (
 	"time"
 )
 
-func GetMatrixSum(){
+func GetMatrixSum() {
 	const Row, Col = 8, 5
 	m1 := [Row][Col]int{}
 	m2 := [Row][Col]int{}
 	m3 := [Row][Col]int{}
 
 	rand.Seed(time.Now().Unix())
-	for i:=0;i<Row;i++{
-		for j:=0;j<Col;j++{
+	for i := 0; i < Row; i++ {
+		for j := 0; j < Col; j++ {
 			m1[i][j] = rand.Intn(128)
 			m2[i][j] = rand.Intn(128)
 		}
@@ -24,8 +24,8 @@ func GetMatrixSum(){
 	fmt.Println(m1)
 	fmt.Println(m2)
 
-	for i:=0;i<Row;i++{
-		for j:=0;j<Col;j++{
+	for i := 0; i < Row; i++ {
+		for j := 0; j < Col; j++ {
 			m3[i][j] = m1[i][j] + m2[i][j]
 		}
 	}
@@ -33,22 +33,21 @@ func GetMatrixSum(){
 	fmt.Println(m3)
 }
 
-
-func GetSeasonByIf(seasonInt int){
-	if seasonInt >= 3 && seasonInt <= 5{
+func GetSeasonByIf(seasonInt int) {
+	if seasonInt >= 3 && seasonInt <= 5 {
 		fmt.Println("春季")
-	}else if seasonInt >= 6 && seasonInt <= 8{
+	} else if seasonInt >= 6 && seasonInt <= 8 {
 		fmt.Println("夏季")
-	}else if seasonInt >= 9 && seasonInt <= 11 {
+	} else if seasonInt >= 9 && seasonInt <= 11 {
 		fmt.Println("秋季")
-	}else if seasonInt == 12 || seasonInt == 1 || seasonInt == 2{
+	} else if seasonInt == 12 || seasonInt == 1 || seasonInt == 2 {
 		fmt.Println("冬季")
-	}else {
+	} else {
 		fmt.Println("错误的月份")
 	}
 }
 
-func GetSeasonBySwitch(seasonInt int){
+func GetSeasonBySwitch(seasonInt int) {
 	switch {
 	case seasonInt >= 3 && seasonInt <= 5:
 		fmt.Println("春季")
@@ -64,28 +63,28 @@ func GetSeasonBySwitch(seasonInt int){
 }
 
 type student struct {
-	name string
+	name    string
 	chinese int
-	math int
+	math    int
 	english int
 }
 
-func (stu student) studentGpa() float64{
-	gpa := float64(stu.chinese + stu.math + stu.english) / 3
+func (stu student) studentGpa() float64 {
+	gpa := float64(stu.chinese+stu.math+stu.english) / 3
 	return gpa
 }
 
 type class struct {
 	chinese_gpa float64
-	math_gpa float64
+	math_gpa    float64
 	english_gpa float64
-	students []student
+	students    []student
 }
 
-func (cls *class) setClassGpa(course string){
+func (cls *class) setClassGpa(course string) {
 	totalScore := 0
 	studentCount := len(cls.students)
-	for _, stu := range cls.students{
+	for _, stu := range cls.students {
 		switch course {
 		case "chinese":
 			totalScore += stu.chinese
@@ -107,23 +106,23 @@ func (cls *class) setClassGpa(course string){
 	}
 }
 
-func (cls class) gpaLower60StudentsCount() int{
+func (cls class) gpaLower60StudentsCount() int {
 	count := 0
-	for _, stu := range cls.students{
+	for _, stu := range cls.students {
 		stu_gpa := stu.studentGpa()
-		if stu_gpa < 60{
+		if stu_gpa < 60 {
 			count += 1
 		}
 	}
 	return count
 }
 
-func generateClass() class{
+func generateClass() class {
 	cls := class{}
 
 	// 给班级填充50个学员
 	rand.Seed(time.Now().Unix())
-	for i:=0; i< 50; i++ {
+	for i := 0; i < 50; i++ {
 		stu := student{name: "学生" + strconv.Itoa(i), math: rand.Intn(101), chinese: rand.Intn(101),
 			english: rand.Intn(101)}
 		cls.students = append(cls.students, stu)
@@ -137,7 +136,7 @@ func generateClass() class{
 	return cls
 }
 
-func showClassInfo(){
+func showClassInfo() {
 	cls := generateClass()
 	student_count := cls.gpaLower60StudentsCount()
 	fmt.Printf("--班级语文平均分:%0.2f，英语平均分:%0.2f，数学平均分:%0.2f--\n", cls.chinese_gpa, cls.english_gpa, cls.math_gpa)
@@ -145,8 +144,7 @@ func showClassInfo(){
 
 }
 
-
-func main(){
+func main() {
 	fmt.Print("---随机初始化两个8*5的矩阵，求两个矩阵的和---\n")
 	GetMatrixSum()
 
@@ -168,3 +166,5 @@ func main(){
 		"求每位同学的平均分和整个班三门课的平均分，全班同学平均分低于60的有几位---\n")
 	showClassInfo()
 }
+
+// 逻辑不错。第一个可以考虑下不使用固定的Row, Col = 8, 5如何实现

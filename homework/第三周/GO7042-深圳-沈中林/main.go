@@ -12,13 +12,13 @@ import (
 // JudMonth 2.给定月份，判断属于哪个季节。分别用if和switch实现
 func JudMonth(month int) (season string, err error) {
 	switch month {
-	case 1,2,3:
+	case 1, 2, 3:
 		season = "Spring"
-	case 4,5,6:
+	case 4, 5, 6:
 		season = "Summer"
-	case 7,8,9:
+	case 7, 8, 9:
 		season = "Autumn"
-	case 10,11,12:
+	case 10, 11, 12:
 		season = "Winter"
 	default:
 		season = "null"
@@ -110,3 +110,6 @@ func main() {
 
 }
 
+// 第一题未完成，可以继续思考下
+// 第二题的if可以实现下
+// 第三题未实现统计不及格的人数
