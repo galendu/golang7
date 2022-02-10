@@ -1,20 +1,20 @@
-package main
+ï»¿package main
 
 import (
 	"errors"
 	"fmt"
 )
 
-// 1.ÊµÏÖÒ»¸öº¯Êı£¬½ÓÊÜÈô¸É¸öfloat64£¨ÓÃ²»¶¨³¤²ÎÊı£©£¬·µ»ØÕâĞ©²ÎÊı³Ë»ıµÄµ¹Êı£¬³ıÊıÎª0Ê±·µ»Øerror
+// 1.å®ç°ä¸€ä¸ªå‡½æ•°ï¼Œæ¥å—è‹¥å¹²ä¸ªfloat64ï¼ˆç”¨ä¸å®šé•¿å‚æ•°ï¼‰ï¼Œè¿”å›è¿™äº›å‚æ•°ä¹˜ç§¯çš„å€’æ•°ï¼Œé™¤æ•°ä¸º0æ—¶è¿”å›error
 func q1_1(fa ...float64) (float64,error) {
 
   if len(fa)<1{
-    return 0, errors.New("¸öÊıÎª0")
+    return 0, errors.New("ä¸ªæ•°ä¸º0")
   }
   tmpData:=1.
   for _,value:=range fa{
     if value == 0{
-      return 0, errors.New("Êı¾İÖĞÓĞ0")
+      return 0, errors.New("æ•°æ®ä¸­æœ‰0")
     }
     tmpData=tmpData*value
   }
@@ -38,14 +38,14 @@ func q1_2(fa ...float64) (float64,error){
   }
   ret:=q1_2_1(fa...)
   if ret == 0{
-    return 0,errors.New("the result is 0 or Èë²ÎÓĞ0")
+    return 0,errors.New("the result is 0 or å…¥å‚æœ‰0")
   }
   
   return 1/ret,nil
 
 }
 
-// 3.¶¨ÒåÁ½¸ö½Ó¿Ú£ºÓãÀàºÍÅÀĞĞ¶¯Îï£¬ÔÙ¶¨ÒåÒ»¸ö½á¹¹Ìå£ºÇàÍÜ£¬Í¬Ê±ÊµÏÖÉÏÊöÁ½¸ö½Ó¿Ú
+// 3.å®šä¹‰ä¸¤ä¸ªæ¥å£ï¼šé±¼ç±»å’Œçˆ¬è¡ŒåŠ¨ç‰©ï¼Œå†å®šä¹‰ä¸€ä¸ªç»“æ„ä½“ï¼šé’è›™ï¼ŒåŒæ—¶å®ç°ä¸Šè¿°ä¸¤ä¸ªæ¥å£
 type (
   Fish interface{
     youyong() string
@@ -66,7 +66,7 @@ func (qw Qingwa) Move() string {
   return fmt.Sprintf("%s is moving\n",qw.name)
 
 }
-// 4.ÊµÏÖº¯Êıfunc square(num interface{}) interface{}£¬¼ÆËãÒ»¸öinterface{}µÄÆ½·½£¬interface{}ÔÊĞíÊÇ4ÖÖÀàĞÍ£ºfloat32¡¢float64¡¢int¡¢byte 
+// 4.å®ç°å‡½æ•°func square(num interface{}) interface{}ï¼Œè®¡ç®—ä¸€ä¸ªinterface{}çš„å¹³æ–¹ï¼Œinterface{}å…è®¸æ˜¯4ç§ç±»å‹ï¼šfloat32ã€float64ã€intã€byte 
 type Cal interface{
   Area(num interface{}) interface{}
 
@@ -90,7 +90,7 @@ func (s Square) Area(num interface{}) interface{}{
     v:=num.(byte)
     return v * v   
   default:
-    return errors.New("Êı¾İÀàĞÍ²»ºÏ·¨")
+    return errors.New("æ•°æ®ç±»å‹ä¸åˆæ³•")
 }
 }
  
@@ -99,29 +99,29 @@ func (s Square) Area(num interface{}) interface{}{
 
 
 func main(){
-  // 1.ÊµÏÖÒ»¸öº¯Êı£¬½ÓÊÜÈô¸É¸öfloat64£¨ÓÃ²»¶¨³¤²ÎÊı£©£¬·µ»ØÕâĞ©²ÎÊı³Ë»ıµÄµ¹Êı£¬³ıÊıÎª0Ê±·µ»Øerror   
+  // 1.å®ç°ä¸€ä¸ªå‡½æ•°ï¼Œæ¥å—è‹¥å¹²ä¸ªfloat64ï¼ˆç”¨ä¸å®šé•¿å‚æ•°ï¼‰ï¼Œè¿”å›è¿™äº›å‚æ•°ä¹˜ç§¯çš„å€’æ•°ï¼Œé™¤æ•°ä¸º0æ—¶è¿”å›error   
   qrr:=[]float64{0.20,0.0221,0.1228}
   q_re,err1 :=q1_1(qrr...)
   if err1 == nil {
    fmt.Printf("Q1 result is %10.10f\n",q_re) 
   }else {
-    fmt.Printf("ERROR£º²ÎÊıÖĞÓĞ0")
+    fmt.Printf("ERRORï¼šå‚æ•°ä¸­æœ‰0")
   }
 
-  // 2.ÉÏÌâÓÃµİ¹éÊµÏÖ
+  // 2.ä¸Šé¢˜ç”¨é€’å½’å®ç°
   q_re2,err2:=q1_2(qrr...)
   if err2 == nil {
      fmt.Printf("Q2 result is %10.10f\n",q_re2) 
   }
 
-  // 3.¶¨ÒåÁ½¸ö½Ó¿Ú£ºÓãÀàºÍÅÀĞĞ¶¯Îï£¬ÔÙ¶¨ÒåÒ»¸ö½á¹¹Ìå£ºÇàÍÜ£¬Í¬Ê±ÊµÏÖÉÏÊöÁ½¸ö½Ó¿Ú
+  // 3.å®šä¹‰ä¸¤ä¸ªæ¥å£ï¼šé±¼ç±»å’Œçˆ¬è¡ŒåŠ¨ç‰©ï¼Œå†å®šä¹‰ä¸€ä¸ªç»“æ„ä½“ï¼šé’è›™ï¼ŒåŒæ—¶å®ç°ä¸Šè¿°ä¸¤ä¸ªæ¥å£
    fish :=Qingwa{name: "xiaoyu"}
    fmt.Printf("Q3 result is:%s",fish.Move())      
    fmt.Printf("Q3 result is:%s",fish.Youyong())
    
-  // 4.ÊµÏÖº¯Êıfunc square(num interface{}) interface{}£¬¼ÆËãÒ»¸öinterface{}µÄÆ½·½£¬interface{}ÔÊĞíÊÇ4ÖÖÀàĞÍ£ºfloat32¡¢float64¡¢int¡¢by 
+  // 4.å®ç°å‡½æ•°func square(num interface{}) interface{}ï¼Œè®¡ç®—ä¸€ä¸ªinterface{}çš„å¹³æ–¹ï¼Œinterface{}å…è®¸æ˜¯4ç§ç±»å‹ï¼šfloat32ã€float64ã€intã€by 
   a:=Square{X:5.5}
-  fmt.Println("Q4¼ÆËã½á¹ûÎª:",a.Area(a.X))
+  fmt.Println("Q4è®¡ç®—ç»“æœä¸º:",a.Area(a.X))
 
 
 }
