@@ -32,5 +32,5 @@ func BinaryFormat(n int32) string {
 	//fmt.Printf("%d的二进制是%b,%d的十进制是%d\n", n, a, n, n)
 	//fmt.Printf("2的31次方的二进制是%b,十进制是%d\n", c, c)
 
-	return "换算成32进制是" + sb.String()
+	return "换算成32进制：" + sb.String()
 }
