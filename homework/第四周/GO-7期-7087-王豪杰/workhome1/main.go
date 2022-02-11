@@ -16,3 +16,5 @@ func Square(num interface{}) interface{} {
 		return "类型不正确..."
 	}
 }
+
+// 错误提示可以详细一些

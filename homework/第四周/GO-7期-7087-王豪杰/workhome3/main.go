@@ -17,3 +17,6 @@ func Work(slice ...float64) (float64, error) {
 
 	return 1 / number, nil
 }
+
+// slices和slice换一下
+// 实现下递归方式

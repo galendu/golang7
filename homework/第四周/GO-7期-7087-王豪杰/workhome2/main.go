@@ -26,3 +26,5 @@ func (f *Frog) Crawl() string {
 
 	return f.Name + "爬了十万八千里..."
 }
+
+// 目前的代码可以思考下Amphibian实现的必要性，虽说问题不大
