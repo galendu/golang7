@@ -39,3 +39,5 @@ func main() {
 	s = work4.Square('s')
 	fmt.Println(s)
 }
+
+// 工程化实现不正确，等后面的课程可以学习

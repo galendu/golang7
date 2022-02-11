@@ -23,3 +23,5 @@ func square(num interface{}) interface{} {
 func main() {
 	fmt.Println(square(12321))
 }
+
+// 错误提示要清晰些

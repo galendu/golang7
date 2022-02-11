@@ -103,3 +103,5 @@ func main() {
 	fmt.Println(square(byte('s')))
 
 }
+
+// 第一二题思考下是不是少一种判断逻辑

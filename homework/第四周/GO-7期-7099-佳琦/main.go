@@ -44,12 +44,12 @@ func test2(f ...float64) (float64, error) {
 
 // 3.定义两个接口：鱼类和爬行动物，再定义一个结构体：青蛙，同时实现上述两个接口
 type fish interface {
-	say (conent string)
+	say(conent string)
 }
 
 // 爬行动物
 type reptile interface {
-	run (distance int)
+	run(distance int)
 }
 
 // 两栖动物
@@ -62,15 +62,15 @@ type frog struct {
 	color string
 }
 
-func (f *frog) say(content string){
+func (f *frog) say(content string) {
 	fmt.Println("咕嘟嘟oO0~" + content)
 }
 
-func (f *frog) run(distance int){
+func (f *frog) run(distance int) {
 	fmt.Println("跑了" + strconv.Itoa(distance) + "米")
 }
 
-func gua (a amphibian) {
+func gua(a amphibian) {
 	a.say("hi")
 	a.run(3)
 }
@@ -102,7 +102,7 @@ func main() {
 	fg := frog{"green"}
 	gua(&fg)
 	// 4
-	var f32 float32 = 3 
+	var f32 float32 = 3
 	var f64 float64 = 6
 	var i int = 1
 	var b byte = 97
@@ -111,3 +111,7 @@ func main() {
 	fmt.Println(square(i))
 	fmt.Println(square(b))
 }
+
+// 第一题思考下是不是少了一种情况，第二题可以优化下
+// 第三题虽然扩展的不是很恰当，但很不错
+// 第四题错误可以更明白的提示使用者

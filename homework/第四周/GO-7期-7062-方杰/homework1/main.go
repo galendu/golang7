@@ -22,7 +22,7 @@ func reciprocal(args ...float64) (reciprocal float64, err error) {
 	}
 	if product == 0 {
 		err = errors.New("Divisor can't be zero!")
-		return
+		return //此处要返回错误以提示错误的原因
 	}
 	reciprocal = 1 / product
 	return reciprocal, err

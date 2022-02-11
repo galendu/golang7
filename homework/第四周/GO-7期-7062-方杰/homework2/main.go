@@ -43,7 +43,7 @@ func reciprocal(args ...float64) (reciprocal float64, err error) {
 		}
 	}
 	result = multiplication(args...) // 调用递归计算乘积
-	if result == 0 {          // 乘积为0
+	if result == 0 {                 // 乘积为0
 		err = errors.New("Divisor can't be zero!")
 		reciprocal = 0.0
 		return
@@ -66,3 +66,5 @@ func main() {
 		fmt.Println(result)
 	}
 }
+
+// 逻辑可以进行优化

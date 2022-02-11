@@ -35,3 +35,5 @@ func main() {
 	fmt.Println(frog.Swim())
 	fmt.Println(frog.Action())
 }
+
+// 完成的不错

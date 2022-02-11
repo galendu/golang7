@@ -17,3 +17,5 @@ func Square(num interface{}) interface{} {
 		return nil
 	}
 }
+
+// 返回考虑返回interface和error

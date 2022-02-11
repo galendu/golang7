@@ -39,3 +39,5 @@ func main() {
 	fmt.Println(GetReciprocal(10.0, 100, 424.12414))
 	fmt.Println(GetReciprocal())
 }
+
+// 完成的不错

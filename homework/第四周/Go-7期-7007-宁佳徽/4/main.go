@@ -27,3 +27,5 @@ func main() {
 	fmt.Println(square(byte(10)))
 	fmt.Println(square("10"))
 }
+
+// 完成的不错

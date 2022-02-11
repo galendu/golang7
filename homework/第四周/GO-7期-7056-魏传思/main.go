@@ -112,3 +112,5 @@ func main() {
 	fmt.Printf("v=%f type=%T\n", b, b)
 
 }
+
+// 第二题可以再思考下
