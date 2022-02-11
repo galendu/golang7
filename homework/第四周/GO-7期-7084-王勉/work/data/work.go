@@ -111,3 +111,5 @@ paxing.Paxingdongwu()
 var input float32 = 11.11
 fmt.Println("a float32:: ", square(input))
 }
+
+// 第一二题思考下是不是少了一种情况
