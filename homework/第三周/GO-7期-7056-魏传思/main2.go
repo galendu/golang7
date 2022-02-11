@@ -171,3 +171,7 @@ func main() {
 	class.EnlishAvg()
 	fmt.Printf("不及格的同学有%d位\n", class.Fail())
 }
+
+// 就按照这个来了。直接提交最终版就行
+// 第一题可以实现下生成矩阵的方法韩素
+// 输出可以进行一些优化

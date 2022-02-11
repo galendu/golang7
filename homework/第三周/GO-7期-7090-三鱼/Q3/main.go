@@ -56,3 +56,5 @@ func main() {
 	fmt.Printf("低于60分的同学有%d位", flag)
 
 }
+
+// 完成的不错
