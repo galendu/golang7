@@ -116,3 +116,5 @@ func main() {
 		fmt.Printf("%v=%v\t", key, value)
 	}
 }
+
+// 完成的不错，第一题可以实现一个生成矩阵的方法函数

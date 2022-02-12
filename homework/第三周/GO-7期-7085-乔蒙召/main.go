@@ -192,3 +192,5 @@ func main() {
 	StatStusinfo(stusinfo)
 	fmt.Printf("-----------------------------\n")
 }
+
+// 逻辑清晰正确

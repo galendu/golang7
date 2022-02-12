@@ -47,3 +47,5 @@ func main() {
 	fisher.Swim()
 	reptileer.crawl(10)
 }
+
+// 后面单独的对应的函数不用实现即可

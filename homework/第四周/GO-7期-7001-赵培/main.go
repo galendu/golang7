@@ -115,3 +115,6 @@ func main() {
 	res = square(byte('h')) //h=8
 	fmt.Printf("res的类型%T,结果是%v\n", res, res)
 }
+
+// 第一、二题想一想有没有缺少逻辑
+// 第三题整体思路是没错

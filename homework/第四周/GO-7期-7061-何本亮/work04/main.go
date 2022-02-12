@@ -22,3 +22,5 @@ func main() {
 	s := square(num)
 	fmt.Printf("%v的平方为: %v\n", num, s)
 }
+
+// 最后的提示可以提示支持哪些类型

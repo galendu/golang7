@@ -20,18 +20,18 @@ func get_sum() {
 
 		}
 	}
-	fmt.Printf("Á½¸ö¾ØÕóÇóºÍ½á¹ûÎª: %d", sum)
+	fmt.Printf("ä¸¤ä¸ªçŸ©é˜µæ±‚å’Œç»“æžœä¸º: %d", sum)
 }
 
 func season_if(m int) {
 	if m >= 2 && m <= 4 {
-		fmt.Printf("%dÔÂµ±Ç°¼¾½ÚÊÇ´º¼¾\n", m)
+		fmt.Printf("%dæœˆå½“å‰å­£èŠ‚æ˜¯æ˜¥å­£\n", m)
 	} else if m >= 5 && m <= 7 {
-		fmt.Printf("%dÔÂµ±Ç°¼¾½ÚÊÇÏÄ¼¾\n", m)
+		fmt.Printf("%dæœˆå½“å‰å­£èŠ‚æ˜¯å¤å­£\n", m)
 	} else if m >= 8 && m <= 10 {
-		fmt.Printf("%dÔÂµ±Ç°¼¾½ÚÊÇÇï¼¾\n", m)
+		fmt.Printf("%dæœˆå½“å‰å­£èŠ‚æ˜¯ç§‹å­£\n", m)
 	} else {
-		fmt.Printf("%dÔÂµ±Ç°¼¾½ÚÊÇ¶¬¼¾\n", m)
+		fmt.Printf("%dæœˆå½“å‰å­£èŠ‚æ˜¯å†¬å­£\n", m)
 	}
 
 }
@@ -39,13 +39,13 @@ func season_if(m int) {
 func season_sw(m int) {
 	switch {
 	case m >= 2 && m <= 4:
-		fmt.Printf("%dÔÂµ±Ç°¼¾½ÚÊÇ´º¼¾\n", m)
+		fmt.Printf("%dæœˆå½“å‰å­£èŠ‚æ˜¯æ˜¥å­£\n", m)
 	case m >= 5 && m <= 7:
-		fmt.Printf("%dÔÂµ±Ç°¼¾½ÚÊÇÏÄ¼¾\n", m)
+		fmt.Printf("%dæœˆå½“å‰å­£èŠ‚æ˜¯å¤å­£\n", m)
 	case m >= 8 && m <= 10:
-		fmt.Printf("%dÔÂµ±Ç°¼¾½ÚÊÇÇï¼¾\n", m)
+		fmt.Printf("%dæœˆå½“å‰å­£èŠ‚æ˜¯ç§‹å­£\n", m)
 	default:
-		fmt.Printf("%dÔÂµ±Ç°¼¾½ÚÊÇ¶¬¼¾\n", m)
+		fmt.Printf("%dæœˆå½“å‰å­£èŠ‚æ˜¯å†¬å­£\n", m)
 
 	}
 }
@@ -56,7 +56,7 @@ type student struct {
 }
 
 func get_all_stu_avg(num int) {
-	//Éú³ÉÑ§ÉúÊýÁ¿
+	
 	stu := student{}
 	s := make([]student, 0, num)
 	sum_y := 0
@@ -71,7 +71,7 @@ func get_all_stu_avg(num int) {
 		stu.name = strconv.Itoa(i)
 		s = append(s, stu)
 		avg := (s[i].yuwen + s[i].shuxue + s[i].waiyu) / 3
-		fmt.Printf("Ñ§Éú%2d ³É¼¨£º ÓïÎÄ %3d ÊýÑ§ %3d ÍâÓï %3d  Æ½¾ù·Ö£º%3d \n", i, s[i].yuwen, s[i].shuxue, s[i].waiyu, avg)
+		fmt.Printf("å­¦ç”Ÿ%2d æˆç»©ï¼š è¯­æ–‡ %3d æ•°å­¦ %3d å¤–è¯­ %3d  å¹³å‡åˆ†ï¼š%3d \n", i, s[i].yuwen, s[i].shuxue, s[i].waiyu, avg)
 		sum_y += s[i].yuwen
 		sum_s += s[i].shuxue
 		sum_w += s[i].waiyu
@@ -80,20 +80,23 @@ func get_all_stu_avg(num int) {
 		}
 
 	}
-	fmt.Printf("ÓïÎÄµÄÆ½¾ù·ÖÊÇ  %5d\n", sum_y/num)
-	fmt.Printf("ÊýÑ§µÄÆ½¾ù·ÖÊÇ  %5d\n", sum_s/num)
-	fmt.Printf("ÍâÓïµÄÆ½¾ù·ÖÊÇ  %5d\n", sum_w/num)
-	fmt.Printf("È«°àµÍÓÚÆ½¾ù·Ö60µÄÍ¬Ñ§ÓÐ%d¸ö\n", avg_60)
+	fmt.Printf("è¯­æ–‡çš„å¹³å‡åˆ†æ˜¯  %5d\n", sum_y/num)
+	fmt.Printf("æ•°å­¦çš„å¹³å‡åˆ†æ˜¯  %5d\n", sum_s/num)
+	fmt.Printf("å¤–è¯­çš„å¹³å‡åˆ†æ˜¯  %5d\n", sum_w/num)
+	fmt.Printf("å…¨ç­ä½ŽäºŽå¹³å‡åˆ†60çš„åŒå­¦æœ‰%dä¸ª\n", avg_60)
 
 }
 
 func main() {
 
-	// 1.Ëæ»ú³õÊ¼»¯Á½¸ö8*5µÄ¾ØÕó£¬ÇóÁ½¸ö¾ØÕóµÄºÍ£¨ÖðÔªËØÏà¼Ó£©
+	// 1.éšæœºåˆå§‹åŒ–ä¸¤ä¸ª8*5çš„çŸ©é˜µï¼Œæ±‚ä¸¤ä¸ªçŸ©é˜µçš„å’Œï¼ˆé€å…ƒç´ ç›¸åŠ ï¼‰
 	get_sum()
-	// 2.¸ø¶¨ÔÂ·Ý£¬ÅÐ¶ÏÊôÓÚÄÄ¸ö¼¾½Ú¡£·Ö±ðÓÃifºÍswitchÊµÏÖ
+	// 2.ç»™å®šæœˆä»½ï¼Œåˆ¤æ–­å±žäºŽå“ªä¸ªå­£èŠ‚ã€‚åˆ†åˆ«ç”¨ifå’Œswitchå®žçŽ°
 	season_if(5)
 	season_sw(12)
-	// 3.´´½¨Ò»¸östudent½á¹¹Ìå£¬°üº¬ÐÕÃûºÍÓïÊýÍâÈýÃÅ¿ÎµÄ³É¼¨¡£ÓÃÒ»¸ösliceÈÝÄÉÒ»¸ö°àµÄÍ¬Ñ§£¬ÇóÃ¿Î»Í¬Ñ§µÄÆ½¾ù·ÖºÍÕû¸ö°àÈýÃÅ¿ÎµÄÆ½¾ù·Ö£¬È«°àÍ¬Ñ§Æ½¾ù·ÖµÍÓÚ60µÄÓÐ¼¸Î»
+	// 3.åˆ›å»ºä¸€ä¸ªstudentç»“æž„ä½“ï¼ŒåŒ…å«å§“åå’Œè¯­æ•°å¤–ä¸‰é—¨è¯¾çš„æˆç»©ã€‚ç”¨ä¸€ä¸ªsliceå®¹çº³ä¸€ä¸ªç­çš„åŒå­¦ï¼Œæ±‚æ¯ä½åŒå­¦çš„å¹³å‡åˆ†å’Œæ•´ä¸ªç­ä¸‰é—¨è¯¾çš„å¹³å‡åˆ†ï¼Œå…¨ç­åŒå­¦å¹³å‡åˆ†ä½ŽäºŽ60çš„æœ‰å‡ ä½
 	get_all_stu_avg(50)
 }
+
+// ç¬¬ä¸€é¢˜å¯ä»¥å®žçŽ°ç”ŸæˆçŸ©é˜µçš„æ–¹æ³•å‡½æ•°
+// ç¬¬äºŒé¢˜æ€è€ƒä¸‹æ˜¯ä¸æ˜¯å°‘äº†ä¸€ä¸ªé€»è¾‘åˆ¤æ–­

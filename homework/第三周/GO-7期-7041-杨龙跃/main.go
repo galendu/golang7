@@ -14,20 +14,19 @@ import (
 func homework1() {
 	//随机初始化两个8*5的矩阵，求两个矩阵的和（逐元素相加）
 
-	arr1 :=[8][5]int{}
-	arr2 :=[8][5]int{}
+	arr1 := [8][5]int{}
+	arr2 := [8][5]int{}
 	for i := 1; i <= 5; i++ {
 		for j := 1; j <= 2; j++ {
-			arr1[i][j]=rand.Intn(66)
-			arr2[i][j]=rand.Intn(66)
-			arr3 :=arr1[i][j]+arr2[i][j]
+			arr1[i][j] = rand.Intn(66)
+			arr2[i][j] = rand.Intn(66)
+			arr3 := arr1[i][j] + arr2[i][j]
 			//求两个矩阵的和
-			fmt.Println("arr3:",arr3)
-			
+			fmt.Println("arr3:", arr3)
+
 		}
 
 	}
-	
 
 }
 
@@ -67,8 +66,8 @@ func homework2_2(moth int) {
 
 func homework3() {
 	/*
-		创建一个student结构体，包含姓名和语数外三门课的成绩。用一个slice容纳一个班的同学，
-	求每位同学的平均分和整个班三门课的平均分，全班同学平均分低于60的有几位
+			创建一个student结构体，包含姓名和语数外三门课的成绩。用一个slice容纳一个班的同学，
+		求每位同学的平均分和整个班三门课的平均分，全班同学平均分低于60的有几位
 	*/
 	//创建一个student结构体，包含姓名和语数外三门课的成绩
 	type student struct {
@@ -112,3 +111,6 @@ func main() {
 	homework1()
 
 }
+
+// 第一题可以实现下生成矩阵的方法
+// 第二题为啥switch方法少了一个逻辑

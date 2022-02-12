@@ -16,8 +16,8 @@ func floatpro(x float64, y ...float64) float64 {
 	}
 	if pro == 0 {
 		fmt.Println("error")
-	}else {
-		shu := 1 / pro 
+	} else {
+		shu := 1 / pro
 		return shu
 	}
 	return pro
@@ -27,3 +27,6 @@ func main() {
 	ret := floatpro(12.9, 0, 3.2)
 	fmt.Println(ret)
 }
+
+// 可以再思考优化下逻辑
+// 把递归的方式也想一下

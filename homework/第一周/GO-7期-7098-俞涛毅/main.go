@@ -1,11 +1,11 @@
-package main
+ï»¿package main
 
 import (
 	"fmt"
 	"math"
 	"strings"
 )
-//Êä³ö¶þ½øÖÆµÄÒ»¸öº¯Êý
+//è¾“å‡ºäºŒè¿›åˆ¶çš„ä¸€ä¸ªå‡½æ•°
 func BinaryFormat(n int32) string {
 	a := uint32(n)
 	sb := strings.Builder{}
@@ -24,10 +24,10 @@ func BinaryFormat(n int32) string {
 
 }
 func main() {
-	fmt.Printf("(8)   ¶þ½øÖÆÊä³ö: %s \n", BinaryFormat(8))
-	fmt.Printf("(120)  ¶þ½øÖÆÊä³ö: %s \n", BinaryFormat(260))
-	fmt.Printf("(-280)  ¶þ½øÖÆÊä³ö: %s \n", BinaryFormat(-280))
-	fmt.Printf("(1024)  ¶þ½øÖÆÊä³ö: %s \n", BinaryFormat(1024))
-	fmt.Printf("(-20968) ¶þ½øÖÆÊä³ö: %s \n", BinaryFormat(-20968))
+	fmt.Printf("(8)   äºŒè¿›åˆ¶è¾“å‡º: %s \n", BinaryFormat(8))
+	fmt.Printf("(120)  äºŒè¿›åˆ¶è¾“å‡º: %s \n", BinaryFormat(260))
+	fmt.Printf("(-280)  äºŒè¿›åˆ¶è¾“å‡º: %s \n", BinaryFormat(-280))
+	fmt.Printf("(1024)  äºŒè¿›åˆ¶è¾“å‡º: %s \n", BinaryFormat(1024))
+	fmt.Printf("(-20968) äºŒè¿›åˆ¶è¾“å‡º: %s \n", BinaryFormat(-20968))
 
 }

@@ -120,3 +120,5 @@ func main() {
 	month_switch()
 	number_avg()
 }
+
+// 整体写的不错。第一个可以尝试下for循环不使用matrix[0]和sum[0]有没有其它方法

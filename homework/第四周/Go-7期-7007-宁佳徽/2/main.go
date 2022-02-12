@@ -55,3 +55,5 @@ func main() {
 	fmt.Println(GetReciprocal2(10.0, 0, 424.12414))
 	fmt.Println(GetReciprocal2())
 }
+
+// 整体看起来是正确的，尝试下不用第二个函数去调用递归函数试下

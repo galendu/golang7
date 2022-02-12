@@ -50,7 +50,7 @@ func main() {
 	f.swim()
 	c.crawl()
 
-	// 4 
+	// 4
 	s := square(4)
 	s2 := square(4.5)
 	s3 := square(66)
@@ -60,3 +60,5 @@ func main() {
 	fmt.Println(s3)
 	fmt.Println(s4)
 }
+
+// 完成的不错

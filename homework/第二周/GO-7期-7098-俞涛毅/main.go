@@ -1,4 +1,4 @@
-package main
+ï»¿package main
 
 import (
 	"fmt"
@@ -22,7 +22,7 @@ func get_int() {
 		count_int[value] = count_int[value] + 1
 	}
 
-	fmt.Printf("Ëæ»ú100¸öÔªËØÖĞ£¬¹²ÓĞ%d²»Í¬µÄÔªËØ", len(count_int))
+	fmt.Printf("éšæœº100ä¸ªå…ƒç´ ä¸­ï¼Œå…±æœ‰%dä¸åŒçš„å…ƒç´ ", len(count_int))
 }
 
 func arr2string(arr []int) string {
@@ -39,10 +39,10 @@ func arr2string(arr []int) string {
 
 func main() {
 
-	//Í³¼Æ100¸öÔªËØÖĞÓĞ¶àÉÙ¸ö»¥²»ÏàÍ¬ÔªËØ
+	//ç»Ÿè®¡100ä¸ªå…ƒç´ ä¸­æœ‰å¤šå°‘ä¸ªäº’ä¸ç›¸åŒå…ƒç´ 
 	get_int()
 
-	//2. ÊµÏÖÒ»¸öº¯Êıfunc arr2string(arr []int) string£¬±ÈÈçÊäÈë[]int{2,4,6}£¬·µ»Ø¡°2 4 6¡±¡£ÊäÈëµÄÇĞÆ¬¿ÉÄÜºÜ¶Ì£¬Ò²¿ÉÄÜºÜ³¤¡£
+	//2. å®ç°ä¸€ä¸ªå‡½æ•°func arr2string(arr []int) stringï¼Œæ¯”å¦‚è¾“å…¥[]int{2,4,6}ï¼Œè¿”å›â€œ2 4 6â€ã€‚è¾“å…¥çš„åˆ‡ç‰‡å¯èƒ½å¾ˆçŸ­ï¼Œä¹Ÿå¯èƒ½å¾ˆé•¿ã€‚
 	arr := []int{2, 3, 20, 103, 10}
 	fmt.Printf("%v", arr2string(arr))
 
