@@ -4,7 +4,7 @@ import "errors"
 
 func Work2(args ...float32) (float32, error) {
 	if len(args) == 0 {
-		return 0, errors.New("divide by zero")
+		return 0, errors.New("divide by zero") // 这种逻辑思考下错误是不是对应的条件
 	}
 	first := args[0]
 	if first == 0 {
@@ -21,3 +21,5 @@ func Work2(args ...float32) (float32, error) {
 		return 1 / first * res, nil
 	}
 }
+
+// 逻辑可以再优化下

@@ -42,3 +42,5 @@ func main() {
 	fmt.Scanln(&month)
 	season(month)
 }
+
+// 完成的不错

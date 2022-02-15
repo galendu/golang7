@@ -36,3 +36,5 @@ func main() {
 	reptile.Breath()
 
 }
+
+// Breath想下方法是否恰当

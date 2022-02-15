@@ -23,7 +23,7 @@ func ComputeMulDes(num ...float64) float64 {
 	if len(num) == 1 {
 		return num[0]
 	}
-	return num[len(num) -1] * ComputeMulDes(num[:len(num)-1]...)
+	return num[len(num)-1] * ComputeMulDes(num[:len(num)-1]...)
 }
 func ComputeMulAsc(num ...float64) float64 {
 	if len(num) == 1 {
@@ -144,3 +144,5 @@ func main() {
 	fmt.Println("e rune:: ", Square(e))
 }
 
+// 第一二题可以思考下是不是少了一种逻辑判断
+// 第三四题完成的不错，第三题还扩展了下

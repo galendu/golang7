@@ -26,3 +26,5 @@ func Print(ff []float32) {
 		fmt.Println(f)
 	}
 }
+
+// 要求的是fload64。另外可以思考下是不是少了一种逻辑判断

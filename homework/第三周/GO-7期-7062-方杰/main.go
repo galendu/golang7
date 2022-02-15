@@ -196,3 +196,5 @@ func main() {
 	fmt.Printf("全班数学平均分：%.2f\n", cls_avgs[1])
 	fmt.Printf("全班英语平均分：%.2f\n", cls_avgs[2])
 }
+
+// 完成得不错
