@@ -23,7 +23,7 @@ type Book struct {
 	Price    float32      `json:"price"`
 	Author   *User        `json:"author"` //把指针去掉试试
 	Keywords []string     `json:"kws"`
-	Local    map[int]bool //TODO 暂不支持map
+	Local    map[int]bool //暂不支持map
 }
 
 //由于json字符串里存在{}[]等嵌套情况，直接按,分隔是不合适的
@@ -98,6 +98,31 @@ func Marshal(v interface{}) ([]byte, error) {
 			bf.Truncate(len(bf.Bytes()) - 1) //删除最后一个逗号
 		}
 		bf.WriteByte(']')
+		return bf.Bytes(), nil
+	case reflect.Map:
+		if value.IsValid() && value.IsNil() {
+			return []byte("null"), nil
+		}
+		bf.WriteByte('{')
+		if value.Len() > 0 {
+			for _, key := range value.MapKeys() {
+				if keyBs, err := Marshal(key.Interface()); err != nil {
+					return nil, err
+				} else {
+					bf.Write(keyBs)
+					bf.WriteByte(':')
+					v := value.MapIndex(key)
+					if vBs, err := Marshal(v.Interface()); err != nil {
+						return nil, err
+					} else {
+						bf.Write(vBs)
+						bf.WriteByte(',')
+					}
+				}
+			}
+			bf.Truncate(len(bf.Bytes()) - 1) //删除最后一个逗号
+		}
+		bf.WriteByte('}')
 		return bf.Bytes(), nil
 	case reflect.Struct:
 		bf.WriteByte('{')
@@ -204,6 +229,35 @@ func Unmarshal(data []byte, v interface{}) error {
 					if err := Unmarshal([]byte(arr[i]), eleValue.Interface()); err != nil {
 						return err
 					}
+				}
+			}
+		} else if s != "null" {
+			return fmt.Errorf("invalid json part: %s", s)
+		}
+	case reflect.Map:
+		if s[0] == '{' && s[len(s)-1] == '}' {
+			arr := SplitJson(s[1 : len(s)-1]) //去除前后的{}
+			if len(arr) > 0 {
+				mapValue := reflect.ValueOf(v).Elem()                //别忘了，v是指针
+				mapValue.Set(reflect.MakeMapWithSize(typ, len(arr))) //通过反射创建map
+
+				kType := typ.Key()  //获取map的key的Type
+				vType := typ.Elem() //获取map的value的Type
+				for i := 0; i < len(arr); i++ {
+					brr := strings.Split(arr[i], ":")
+					if len(brr) != 2 {
+						return fmt.Errorf("invalid json part: %s", arr[i])
+					}
+
+					kValue := reflect.New(kType) //根据Type创建指针型的Value
+					if err := Unmarshal([]byte(brr[0]), kValue.Interface()); err != nil {
+						return err
+					}
+					vValue := reflect.New(vType) //根据Type创建指针型的Value
+					if err := Unmarshal([]byte(brr[1]), vValue.Interface()); err != nil {
+						return err
+					}
+					mapValue.SetMapIndex(kValue.Elem(), vValue.Elem()) //往map里面赋值
 				}
 			}
 		} else if s != "null" {
