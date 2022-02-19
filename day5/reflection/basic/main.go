@@ -63,6 +63,46 @@ func get_field() {
 	fmt.Printf("third field name %s\n", thirdField.Name)
 }
 
+//struct的内存对齐问题
+func MemAlign() {
+	type A struct {
+		sex      bool   //
+		height   uint16 //offset  2   它本身占2个字节，它只从偶数位开始，所以即使sex只占1个字节，height的offset也是2
+		addr     byte   //offset  4
+		position byte   //offset  5
+		age      int64  //offset  8   由于由于下一个成员age刚好占8个字节，所以内存对齐机制会让它占用8B个字节(向8的整倍数对齐)
+		weight   uint16 //offset  16
+	} //整个结构体占24个字节
+	t := reflect.TypeOf(A{})
+	fmt.Println(t.Size()) //24B
+
+	fieldNum := t.NumField() //成员变量的个数，包括未导出成员
+	for i := 0; i < fieldNum; i++ {
+		field := t.Field(i)
+		fmt.Printf("%s offset %d\n",
+			field.Name,   //变量名称
+			field.Offset, //相对于结构体首地址的内存偏移量，string类型会占据16个字节
+		)
+	}
+
+	type B struct {
+		weight uint16 //uint16占2个字节
+		sex    bool   //offset 2B
+		age    int64  //offset  8B。虽然weight和sex加起来占3个字节，但由于age要占满8个字节，所以weight和sex加起来实际上占8个字节(向8的整倍数对齐)
+	} //整个结构体占16个字节
+	t = reflect.TypeOf(B{})
+	fmt.Println(t.Size()) //24B
+
+	fieldNum = t.NumField() //成员变量的个数，包括未导出成员
+	for i := 0; i < fieldNum; i++ {
+		field := t.Field(i)
+		fmt.Printf("%s offset %d\n",
+			field.Name,   //变量名称
+			field.Offset, //相对于结构体首地址的内存偏移量，string类型会占据16个字节
+		)
+	}
+}
+
 func get_method() {
 	typeUser := reflect.TypeOf(common.User{})
 	methodNum := typeUser.NumMethod() //成员方法的个数。接收者为指针的方法【不】包含在内，对于结构体未导出成员不包含在内（对于interface没这个限制）
@@ -205,36 +245,39 @@ func addressable() {
 	v6 := v5.Index(0)                                  //可寻址
 	fmt.Printf("v5 is addressable %t\n", v5.CanAddr()) //false
 	fmt.Printf("v6 is addressable %t\n", v6.CanAddr()) //true   sliceValue里的每一个元素是可寻址的
+	v7 := reflect.ValueOf(&slice)                      //不可寻址
+	v8 := v7.Elem()                                    //可寻址
+	fmt.Printf("v7 is addressable %t\n", v7.CanAddr()) //false
+	fmt.Printf("v8 is addressable %t\n", v8.CanAddr()) //true
 
 	mp := make(map[int]bool, 5)
-	v7 := reflect.ValueOf(mp)                          //不可寻址
-	fmt.Printf("v7 is addressable %t\n", v7.CanAddr()) //false
+	v9 := reflect.ValueOf(mp)                          //不可寻址
+	fmt.Printf("v9 is addressable %t\n", v9.CanAddr()) //false
 }
 
 //通过反射改变原始数据的值
-func chane_value() {
+func change_value() {
 	var i int = 10
+	valueI := reflect.ValueOf(&i)
+	if valueI.CanAddr() { //false
+		valueI.SetInt(8)
+	}
+	if valueI.Elem().CanAddr() { //true。必须是可寻址的，才能调用Set进行修改
+		valueI.Elem().SetInt(8)
+	}
+
 	var s string = "hello"
+	valueS := reflect.ValueOf(&s)
+	valueS.Elem().SetString("golang") //不能在指针Value上调用Set系列函数
+	// valueS.Elem().SetInt(8)//会panic
+
 	user := common.User{
 		Id:     7,
 		Name:   "杰克逊",
 		Weight: 65.5,
 		Height: 1.68,
 	}
-
-	valueI := reflect.ValueOf(&i)
-	if valueI.CanAddr() { //false
-		valueI.SetInt(8)
-	}
-	if valueI.Elem().CanAddr() { //必须是可寻址的，才能调用Set进行修改
-		valueI.Elem().SetInt(8)
-	}
-
-	valueS := reflect.ValueOf(&s)
 	valueUser := reflect.ValueOf(&user)
-
-	valueS.Elem().SetString("golang") //不能在指针Value上调用Set系列函数
-	// valueS.Elem().SetInt(8)//会panic
 	valueUser.Elem().FieldByName("Weight").SetFloat(68.0) //FieldByName()通过Name返回类的成员变量。不能在指针Value上调用FieldByName
 	fmt.Printf("i=%d, s=%s, user.Weight=%.1f\n", i, s, user.Weight)
 	addrValue := valueUser.Elem().FieldByName("addr")
@@ -257,7 +300,7 @@ func change_slice() {
 		Height: 1.68,
 	}
 
-	sliceValue := reflect.ValueOf(users) ///不修改的slice struct内部的Field，不需要给ValueOf传地址
+	sliceValue := reflect.ValueOf(users) ///不修改slice struct内部的Field，不需要给ValueOf传地址
 	if sliceValue.Len() > 0 {            //取得slice的长度
 		sliceValue.Index(0).Elem().FieldByName("Name").SetString("令狐一刀")
 		// u0 := users[0]
@@ -275,8 +318,31 @@ func change_slice() {
 
 	sliceValue2 := reflect.ValueOf(&users) //如果要修改Len和Cap，则必须给ValueOf传地址
 	sliceValue2.Elem().SetCap(4)           //新的cap必须位于原始的len到cap之间
-	sliceValue2.Elem().SetLen(4)
+	sliceValue2.Elem().SetLen(4)           //len不能超过cap
 	fmt.Printf("len %d cap %d\n", len(users), cap(users))
+}
+
+func change_total_slice() {
+	s := []int{1, 2, 3}
+	typ := reflect.TypeOf(s)
+	val := reflect.ValueOf(&s)
+
+	newSliceValue := reflect.MakeSlice(typ, 3, 5) //slice里面有3个0
+	if newSliceValue.CanAddr() {                  //false。通过MakeSlice生成的value是unaddressable
+		fmt.Println("newSliceValue is addressable")
+		newSliceValue.Set(val)
+		s2 := newSliceValue.Interface().([]int)
+		fmt.Println(s2)
+	}
+
+	if val.Elem().CanAddr() {
+		fmt.Println("val.Elem() is addressable")
+		val.Elem().Set(newSliceValue) //由于val绑定到了s，所以把s置成了[0,0,0]
+		val.Elem().Index(1).SetInt(8) //把第1个元素修改为8
+		fmt.Println(s)                //0 8 0
+		s2 := val.Elem().Interface().([]int)
+		fmt.Println(s2) //0 8 0
+	}
 }
 
 func change_map() {
@@ -296,9 +362,15 @@ func change_map() {
 	userMap[u1.Id] = u1
 
 	mapValue := reflect.ValueOf(userMap)
+
+	mapType := reflect.TypeOf(userMap)
+	kType := mapType.Key()  //获取map的key的Type
+	vType := mapType.Elem() //获取map的value的Type
+	fmt.Printf("kind of map key %v, kind of map value %v\n", kType.Kind(), vType.Kind())
+
 	//mapValue是unaddressable，但是可以调用SetMapIndex，SetMapIndex跟其他SetInt、SetString不一样
 	mapValue.SetMapIndex(reflect.ValueOf(u2.Id), reflect.ValueOf(u2))                      //SetMapIndex 往map里添加一个key-value对
-	mapValue.MapIndex(reflect.ValueOf(u1.Id)).Elem().FieldByName("Name").SetString("令狐一刀") //MapIndex 根据Key取出对应的map
+	mapValue.MapIndex(reflect.ValueOf(u1.Id)).Elem().FieldByName("Name").SetString("令狐一刀") //MapIndex 根据Key取出对应的value
 	for k, user := range userMap {
 		fmt.Printf("key %d name %s\n", k, user.Name)
 	}
@@ -389,68 +461,12 @@ func new_map() {
 	fmt.Printf("user name %s %s\n", userMap[7].Name, user.Name)
 }
 
-func change_total_slice() {
-	s := []int{1, 2, 3}
-	typ := reflect.TypeOf(s)
-	val := reflect.ValueOf(&s)
-
-	newSliceValue := reflect.MakeSlice(typ, 3, 5) //slice里面有3个0
-	if newSliceValue.CanAddr() {                  //通过MakeSlice生成的value是unaddressable
-		fmt.Println("newSliceValue is addressable")
-		newSliceValue.Set(val)
-		s2 := newSliceValue.Interface().([]int)
-		fmt.Println(s2)
-	}
-
-	if val.Elem().CanAddr() {
-		fmt.Println("val.Elem() is addressable")
-		val.Elem().Set(newSliceValue) //由于val绑定到了s，所以把s置成了[0,0,0]
-		val.Elem().Index(1).SetInt(8) //把第1个元素修改为8
-		fmt.Println(s)                //0 8 0
-		s2 := val.Elem().Interface().([]int)
-		fmt.Println(s2) //0 8 0
-	}
-}
-
-//struct的内存对齐问题
-func MemAlign() {
-	type A struct {
-		sex    bool   //由于内存对齐，实际上会占用8B个字节(向8的整倍数对齐)
-		age    int64  //offset  8B
-		weight uint16 //offset  16B
-	} //整个结构体占24个字节
-	t := reflect.TypeOf(A{})
-	fmt.Println(t.Size()) //24B
-
-	fieldNum := t.NumField() //成员变量的个数，包括未导出成员
-	for i := 0; i < fieldNum; i++ {
-		field := t.Field(i)
-		fmt.Printf("%s offset %d\n",
-			field.Name,   //变量名称
-			field.Offset, //相对于结构体首地址的内存偏移量，string类型会占据16个字节
-		)
-	}
-	/**
-	sex offset 0
-	age offset 8		(向8的整倍数对齐)
-	weight offset 16
-	*/
-}
-
-func update() {
-	var i int = 5
-	valueI := reflect.ValueOf(&i) //
-	valueI.Elem().SetInt(8)       //valueI.Elem()是addressable，valueI是unaddressable
-	fmt.Println(i)                //8
-}
-
 func main() {
-	// update()
 	// get_type()
 	// fmt.Println("===================")
 	// get_field()
 	// fmt.Println("===================")
-	// MemAlign()
+	MemAlign()
 	// fmt.Println("===================")
 	// get_method()
 	// fmt.Println("===================")
@@ -465,9 +481,9 @@ func main() {
 	// fmt.Println("===================")
 	// value_is_empty()
 	// fmt.Println("===================")
-	addressable()
+	// addressable()
 	// fmt.Println("===================")
-	// chane_value()
+	// change_value()
 	// fmt.Println("===================")
 	// change_slice()
 	// fmt.Println("===================")
@@ -486,8 +502,8 @@ func main() {
 	// new_map()
 	// fmt.Println("===================")
 
-	change_total_slice()
-	fmt.Println("===================")
+	// change_total_slice()
+	// fmt.Println("===================")
 }
 
 //go run reflection/basic/main.go
