@@ -28,7 +28,7 @@ func test1(f ...float64) (float64, error) {
 // 2.上题用递归实现
 func test2(f ...float64) (float64, error) {
 	if len(f) == 0 || f[0] == 0 {
-		return 0, nil
+		return 0, errors.New("除0异常")
 	}
 	var result = f[0]
 	var error error
@@ -88,7 +88,8 @@ func square(num interface{}) interface{} {
 		n := uint16(v) // todo 这种处理方式是不是有问题...
 		return n * n
 	default:
-		return "type error"
+		fmt.Printf("unsupport type %T\n", v)
+		return nil
 	}
 }
 
@@ -106,10 +107,12 @@ func main() {
 	var f64 float64 = 6
 	var i int = 1
 	var b byte = 97
+	var ui uint = 100
 	fmt.Println(square(f32))
 	fmt.Println(square(f64))
 	fmt.Println(square(i))
 	fmt.Println(square(b))
+	fmt.Println(square(ui))
 }
 
 // 第一题思考下是不是少了一种情况，第二题可以优化下
