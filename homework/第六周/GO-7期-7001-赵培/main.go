@@ -155,7 +155,7 @@ func zlib_file() {
 
 }
 
-//4. 自己实现一个BufferedFileWriter
+//4. 自己实现一个BufferedFileWriter(暂时未完成)
 //定义buffer结构体
 type BufferedFileWriter struct {
 	bufio_test [1024]byte //定义一个用来存储
