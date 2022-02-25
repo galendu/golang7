@@ -26,44 +26,21 @@ func timeFormat() {
 }
 
 //2. 我们是每周六上课，输出我们未来4次课的上课日期（不考虑法定假日）
-func getClassTime() []time.Time {
+func getClassTime() {
 	now := time.Now()
-	layout := "2006-01-02"
 
 	//由于Weekday是用iota声明的变量，所以本质上是int类型，可用于数字计算,用6减去今天的日期数字
 	offset := int(time.Saturday - now.Weekday())
 
-	loc, err := time.LoadLocation("Asia/Shanghai")
-	if err != nil {
-		fmt.Println(err)
+	saturday := time.Date(now.Year(), now.Month(), now.Day(), 9, 0, 0, 0, time.Local).AddDate(0, 0, offset)
+	fmt.Printf("上一次的上课时间为：%v\n", saturday)
+
+	fmt.Println("后面四次上课时间为：")
+	for i := 0; i < 4; i++ {
+		saturday = saturday.AddDate(0, 0, 7)
+		fmt.Println(saturday)
 	}
 
-	nextSatsObj := []time.Time{}
-	if offset > 0 { //offset大于0说明，当前时间还没到周六，那么上一次上课时间在上一周
-		lastSaturdayTime := now.AddDate(0, 0, offset-7) //得到上一周周六的日期
-		lastSaturday, err := time.ParseInLocation(layout, lastSaturdayTime.Format(layout), loc)
-		if err != nil {
-			fmt.Println(err)
-		}
-		for i := 0; i < 4; i++ {
-			nextSatOjb := lastSaturday.Add(time.Hour * 7 * 24)
-			//nextSatOjb = nextSatOjb.Format("2006-01-02")
-			nextSatsObj = append(nextSatsObj, nextSatOjb)
-			lastSaturday = nextSatOjb
-		}
-	} else { //offset等于小于0，说明当前时间是周六或者周日，直接往后计算4周的上课时间
-		currentSaturdayTime := now.AddDate(0, 0, 6-offset)
-		currentSaturday, err := time.ParseInLocation(layout, currentSaturdayTime.Format(layout), loc)
-		if err != nil {
-			fmt.Println(err)
-		}
-		for i := 0; i < 4; i++ {
-			nextSatOjb := currentSaturday.Add(time.Hour * 7 * 24)
-			nextSatsObj = append(nextSatsObj, nextSatOjb)
-			currentSaturday = nextSatOjb
-		}
-	}
-	return nextSatsObj
 }
 
 //3. 把一个目录下的所有.txt文件合一个大的.txt文件，再对这个大文件进行压缩
@@ -170,14 +147,10 @@ func main() {
 	timeFormat()
 
 	//第二题
-	a := getClassTime()
-	for i, _ := range a {
-		fmt.Printf("上课时间：%v\n", a[i].Format("2006-01-02"))
-	}
+	getClassTime()
 
 	//第三题
 	getFilePath("./homework/file")
-	fmt.Println(fileSlice)
 	mergeFiles("./homework/merge.txt")
 	compressedFile("./homework/merge.txt")
 
