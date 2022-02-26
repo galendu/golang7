@@ -29,16 +29,17 @@ func Fmt_time(time1 string) string {
 }
 
 //2.我们是每周六上课，输出我们未来4次课的上课日期（不考虑法定假日）
-func class_day(n int) {
+func class_day() {
 	today := time.Now()
 	time_dif := time.Saturday - today.Weekday()
     if time_dif==0{
         time_dif=7
     }
 	nestsaturday := time.Now().AddDate(0, 0, int(time_dif))
-	for i := 0; i < n; i++ {
+    fmt.Printf("未来第1次课的上课日期是%.10v,\n", nestsaturday)
+	for i := 2; i < 5; i++ {
 		nestday := nestsaturday.AddDate(0, 0, 7*i)
-		fmt.Printf("未来第%d次课的上课日期是%.10v,\n", i+1, nestday)
+		fmt.Printf("未来第%d次课的上课日期是%.10v,\n", i, nestday)
 	}
 }
 
@@ -177,7 +178,7 @@ func main() {
 	// fmt.Println(Fmt_time(time1))
 
 	//2
-	// class_day(4)
+	// class_day()
 
 	//3
 	// path1 := "G:/go/练习/sl/a"
