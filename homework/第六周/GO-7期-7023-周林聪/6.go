@@ -32,6 +32,9 @@ func Fmt_time(time1 string) string {
 func class_day(n int) {
 	today := time.Now()
 	time_dif := time.Saturday - today.Weekday()
+    if time_dif==0{
+        time_dif=7
+    }
 	nestsaturday := time.Now().AddDate(0, 0, int(time_dif))
 	for i := 0; i < n; i++ {
 		nestday := nestsaturday.AddDate(0, 0, 7*i)
