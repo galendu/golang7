@@ -27,6 +27,7 @@ func (writer *BufferedFileWriter) Flush() {
 
 func (writer *BufferedFileWriter) Write(content []byte) {
 	if len(content) >= 1024 {
+        writer.Flush()
 		writer.fileHandler.Write(content)
 	} else {
 		if writer.endPos+len(content) >= 1024 {
