@@ -1,14 +1,17 @@
 package main
 
-import "os"
+import (
+	"fmt"
+	"os"
+)
 
 type BufferedFileWriter struct {
 	buffer [1024]byte
-	endPos int
+	endPos	int
 	fileHandler *os.File
 }
 
-func NewBufferFileWrite(fd *os.File) *BufferedFileWriter {
+func NewBufferedFileWrite(fd *os.File) *BufferedFileWriter  {
 	return &BufferedFileWriter{
 		fileHandler: fd,
 	}
@@ -17,15 +20,17 @@ func NewBufferFileWrite(fd *os.File) *BufferedFileWriter {
 func (writer *BufferedFileWriter) Flush() {
 	if writer.endPos >0 {
 		writer.fileHandler.Write(writer.buffer[:writer.endPos])
+		fmt.Println("触发写磁盘")
 		writer.endPos = 0
 	}
 }
 
-func (writer *BufferedFileWriter) Write(content []byte) {
-	if len(content)>=1024{
+func (writer *BufferedFileWriter)  Write(content []byte)  {
+	if len(content) >= 1024 {
+		writer.Flush()
 		writer.fileHandler.Write(content)
 	} else {
-		if writer.endPos+len(content)>=1024{
+		if writer.endPos+len(content) >= 1024 {
 			writer.Flush()
 			writer.Write(content)
 		} else {
@@ -35,10 +40,20 @@ func (writer *BufferedFileWriter) Write(content []byte) {
 	}
 }
 
-func (writer *BufferedFileWriter) writeString(content string) {
+func (writer *BufferedFileWriter)  WriteString(content string) {
 	writer.Write([]byte(content))
 }
 
-func testBufferWriter() {
+func testBufferWriter()  {
+	fout,err := os.OpenFile("big.txt",os.O_CREATE|os.O_TRUNC|os.O_WRONLY,os.ModePerm)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	defer fout.Close()
 
+	writer := NewBufferedFileWrite(fout)
+	for i :=0;i<5; i++ {
+		writer.WriteString("1111111\n")
+	}
 }
