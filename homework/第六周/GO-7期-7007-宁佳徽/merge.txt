@@ -1,0 +1,17 @@
+11111
+1olm
+1lj;kll;k
+1ljnhkhkjh
+22222
+fasdfsf
+33413513
+45tlgrfgl
+14124124
+353452
+eteg
+eWATWET
+;'PK,
+L;L;';[PK[RT
+module day6
+
+go 1.17

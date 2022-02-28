@@ -58,7 +58,7 @@ fmt.Printf("error is %+v\n", t) //在 %v 基础上，对结构体字段名和值
 fmt.Printf("error is %#v\n", t) //输出 Go 语言语法格式的值
 ```
 &#8195;&#8195;数值型变量的默认值是0，字符串的默认值是空字符串，布尔型变量的默认值是false，引用类型、函数、指针、接口的默认值是nil。数组的默认值取每个元素对应类型的默认值，结构体的默认值取每个成员变量对应类型的默认值。
-```Go
+```GO
 var a int
 var b byte
 var f float32
@@ -76,6 +76,17 @@ fmt.Printf("default value of string [%s]\n", s)
 fmt.Printf("default value of rune %d, [%c]\n", r, r)
 fmt.Printf("default int array is %v\n", arr) //取每个元素对应类型的默认值
 fmt.Printf("default slice is nil %t\n", slc == nil)
+
+//输出
+default value of int 0
+default value of byte 0
+default value of float 0.00
+default value of bool false
+default value of string []
+default value of rune 0, []
+default int array is [0 0 0]
+default slice is nil true
+
 ```
 复合数据类型
 |类型|默认值|说明|
@@ -163,8 +174,9 @@ for i := 0; i < len(arr); i++ {
     fmt.Printf("%d %d\n", i, arr[i])
 }
 ```
-&#8195;&#8195;在数组上调用cap()函数表示capacity容量，即给数组分配的内存空间可以容纳多少个元素；len()函数代表length长度，即目前数组里有几个元素。由于数组初始化之后长度不会改变，不需要给它预留内存空间，所以len(arr)==cap(arr)。对于多维数组，其cap和len指第一维的长度。  
+在数组上调用cap()函数表示capacity容量，即给数组分配的内存空间可以容纳多少个元素；len()函数代表length长度，即目前数组里有几个元素。由于数组初始化之后长度不会改变，不需要给它预留内存空间，所以len(arr)==cap(arr)。对于多维数组，其cap和len指第一维的长度。
 &#8195;&#8195;数组的长度和类型都是数组类型的一部分，函数传递数组类型时这两部分都必须吻合。go语言没有按引用传参，全都是按值传参，即传递数组实际上传的是数组的拷贝，当数组的长度很大时，仅传参开销都很大。如果想修改函数外部的数组，就把它的指针（数组在内存里的地址）传进来。
+
 ```Go
 //参数必须是长度为5的int型数组（注意长度必须是5）
 func update_array1(arr [5]int) {
@@ -187,7 +199,7 @@ type slice struct {
     cap int 
 }
 ```
-![avatar](img/slice.png)   
+![avatar](img/array.png)   
 
 切片的初始化
 ```Go
@@ -234,13 +246,6 @@ func expansion() {
 	}
 }
 ```
-```Go
-arr := make([]int, 3, 5)
-brr := append(arr, 8) //arr和brr共享底层数组，但它们的len不同
-```
-
-<img src=img/append.png width=700 />
-
 &#8195;&#8195;通过指定起止下标，可以从大切片中截取一个子切片。  
 ```Go
 s := make([]int, 3, 5)	//len=3, cap=5
@@ -302,15 +307,6 @@ s := []int{1, 2, 3}
 update_slice(s)
 fmt.Printf("s=%v\n", s)
 ```
-```Go
-s := make([]int, 2, 3)
-fmt.Printf("address of slice %p, address of array %p %p\n", &s, &s[0], s)
-s = append(s, 4)
-fmt.Printf("address of slice %p, address of array %p %p\n", &s, &s[0], s)
-s = append(s, 4)
-fmt.Printf("address of slice %p, address of array %p %p\n", &s, &s[0], s)
-```
-&#8195;&#8195;获取切片的地址用&s；获取切片底层数组的地址用&s[0]，或直接把s当地址打印。  
 ## 字符串
 &#8195;&#8195;字符串里可以包含任意Unicode字符。
 ```Go
@@ -497,6 +493,7 @@ delete(m, "数学") //从map里删除key-value对
 ```
 &#8195;&#8195;len(m)获取map的长度，go不支持对map上执行cap函数。  
 &#8195;&#8195;读取key对应的value时，如果key不存在，则返回value类型的默认值，所以强烈建议先判断key是否存在。
+
 ```Go
 if value, exists := m["语文"]; exists {
     fmt.Println(value)
@@ -565,6 +562,7 @@ fmt.Println(m5)
 ## channel
 &#8195;&#8195;channel(管道)底层是一个环形队列(先进先出)，send(插入)和recv(取走)从同一个位置沿同一个方向顺序执行。sendx表示最后一次插入元素的位置，recvx表示最后一次取走元素的位置。  
 ![avatar](img/channel.png)  
+
 ```Go
 var ch chan int //管道的声明
 ch = make(chan int, 8) //管道的初始化，环形队列里可容纳8个int
