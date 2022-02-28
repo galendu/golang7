@@ -1,45 +1,99 @@
 package main
 
 import (
+	"errors"
 	"fmt"
-	"math/rand"
-	"strconv"
-	"strings"
 )
 
+/*
+1.实现一个函数，接受若干个float64（用不定长参数），返回这些参数乘积的倒数，除数为0时返回error
+2.上题用递归实现
+3.定义两个接口：鱼类和爬行动物，再定义一个结构体：青蛙，同时实现上述两个接口
+4.实现函数func square(num interface{}) interface{}，计算一个interface{}的平方，interface{}允许是4种类型：float32、float64、int、byte
+*/
+
 func main() {
-	//ss()
-	arr := []int{2, 2, 3, 4, 3}
-	fmt.Println(arr2string(arr))
+	//1.实现一个函数，接受若干个float64（用不定长参数），返回这些参数乘积的倒数，除数为0时返回error
+	list := []float64{1.0, 3.0}
+	alex, err := main1(list...)
+	if err == nil {
+		fmt.Printf("result 的结果是 %.2f\n", alex)
+	} else if err != nil {
+		//	fmt.Println(err)
+	}
+
+	//2.上题用递归实现
+	fmt.Println(digui(32.0))
+
+	//3.定义两个接口：鱼类和爬行动物，再定义一个结构体：青蛙，同时实现上述两个接口
+	inet := Qingw{}
+	fmt.Println(inet.swim())
+	fmt.Println(inet.run())
+
+	//4.实现函数func square(num interface{}) interface{}，计算一个interface{}的平方，interface{}允许是4种类型：float32、float64、int、byte
+	fmt.Println(square(4))
+}
+
+//1.实现一个函数，接受若干个float64（用不定长参数），返回这些参数乘积的倒数，除数为0时返回error
+func main1(f ...float64) (float64, error) {
+	if len(f) < 1 {
+		return 0., errors.New("输入参数个数为0")
+	}
+	result := 1.
+	for _, value := range f {
+		if value == float64(0) {
+			return 0, errors.New("参数中有0，除数不能为0")
+		}
+		result = value
+	}
+	return 1. / result, nil
+}
+
+//2.上题用递归实现
+func digui(num ...float64) float64 {
+	l := len(num)
+	if l == 1 {
+		return num[0]
+	}
+	return num[l-1] * digui(num[:l-1]...)
 
 }
 
-//1. 创建一个初始长度为0、容量为10的int型切片，调用rand.Intn(128)100次，往切片里面添加100个元素，利用map统计该切片里有多少个互不相同的元素。
-func ss() {
-	qp := make([]int, 0, 10)
-	for i := 0; i < 100; i++ {
-		qp = append(qp, rand.Intn(128))
+//3.定义两个接口：鱼类和爬行动物，再定义一个结构体：青蛙，同时实现上述两个接口
+type (
+	Fish interface {
+		swim() string
 	}
-	//fmt.Printf("切片长度为:%d,容量为:%d\n",len(qp),cap(qp))
-	//fmt.Printf("内容为:%d\n",qp)
-
-	map1 := make(map[int]int, 100)
-	for _, err := range qp {
-		map1[err] = 1
+	Papa interface {
+		run() string
 	}
-	fmt.Printf("有%d个互不相同的元素", len(map1))
+)
+type Qingw struct {
+	name  string
+	speak string
 }
 
-//2. 实现一个函数func arr2string(arr []int) string，比如输入[]int{2,4,6}，返回“2 4 6”。输入的切片可能很短，也可能很长。
-func arr2string(arr []int) string {
-	sb := strings.Builder{}
-	for index := 0; index < len(arr)-1; index++ {
-		sb.WriteString(strconv.Itoa(arr[index]))
-		sb.WriteString(" ")
+func (q Qingw) swim() string {
+	q.speak = "呱呱"
+	return q.speak
+}
+func (q Qingw) run() string {
+	q.name = "fire"
+	return q.name
+}
+
+//4.实现函数func square(num interface{}) interface{}，计算一个interface{}的平方，interface{}允许是4种类型：float32、float64、int、byte
+func square(num interface{}) interface{} {
+	switch n := num.(type) {
+	case int:
+		return n * n
+	case float32:
+		return n * n
+	case float64:
+		return n * n
+	case byte:
+		return n * n
+	default:
+		return "请输入正确类型"
 	}
-	indexlast := len(arr) - 1
-	//fmt.Printf("长度为%d,类型为%T",indexlast,indexlast)
-	sb.WriteString(strconv.Itoa(arr[indexlast]))
-	result := sb.String()
-	return result
 }
