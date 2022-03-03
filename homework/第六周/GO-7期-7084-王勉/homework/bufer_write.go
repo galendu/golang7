@@ -25,14 +25,14 @@ func (writer *BufferedFileWriter) Flush() {
 	}
 }
 
-func (writer *BufferedFileWriter)  Write(content []byte)  {
+func (writer *BufferedFileWriter)  Writes(content []byte)  {
 	if len(content) >= 1024 {
 		writer.Flush()
 		writer.fileHandler.Write(content)
 	} else {
 		if writer.endPos+len(content) >= 1024 {
 			writer.Flush()
-			writer.Write(content)
+			writer.Writes(content)
 		} else {
 			copy(writer.buffer[writer.endPos:],content)
 			writer.endPos += len(content)
@@ -41,7 +41,7 @@ func (writer *BufferedFileWriter)  Write(content []byte)  {
 }
 
 func (writer *BufferedFileWriter)  WriteString(content string) {
-	writer.Write([]byte(content))
+	writer.Writes([]byte(content))
 }
 
 func testBufferWriter()  {
