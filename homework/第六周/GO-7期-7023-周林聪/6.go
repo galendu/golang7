@@ -142,35 +142,44 @@ func compress_filer(path string) { //根据上面返回的新文件的目录打�
 
 //4. 自己实现一个BufferedFileWriter
 type BufferedFileWriter struct {
-	Buffer4      []byte
-	Maxbufferlen int
-	Write4       io.Writer
+	buffer      [1024]byte
+	endPos      int
+	fileHandler *os.File
 }
 
-func NewBufferedFileWriter(Write4 io.Writer, n int) *BufferedFileWriter { //创造一个构造函数
+func NewBufferedFileWriter(fd *os.File) *BufferedFileWriter {
 	return &BufferedFileWriter{
-		Buffer4:      make([]byte, n),
-		Maxbufferlen: n,
-		Write4:       Write4,
+		fileHandler: fd,
 	}
 }
 
-func (bfWriter *BufferedFileWriter) Writerstring4(arr []byte) {
-	bfWriter.Buffer4 = append(bfWriter.Buffer4, arr...)
-	if len(bfWriter.Buffer4) >= bfWriter.Maxbufferlen {
-		bfWriter.Flush4()
+func (writer *BufferedFileWriter) Flush() {
+	if writer.endPos > 0 {
+		writer.fileHandler.Write(writer.buffer[:writer.endPos])
+		fmt.Println("触发发真正写磁盘")
+		writer.endPos = 0
+	}
+}
+
+func (writer *BufferedFileWriter) Write(content []byte) {
+	if len(content) >= 1024 {
+        writer.Flush()
+		writer.fileHandler.Write(content)
 	} else {
-		return
+		if writer.endPos+len(content) >= 1024 {
+			writer.Flush()
+			writer.Write(content)
+		} else {
+			copy(writer.buffer[writer.endPos:], content)
+			writer.endPos += len(content)
+		}
 	}
 }
 
-func (bfWriter *BufferedFileWriter) Flush4() {
-
+func (writer *BufferedFileWriter) WriteString(content string) {
+	writer.Write([]byte(content))
 }
 
-func (bfWriter *BufferedFileWriter) Close4() {
-
-}
 
 func main() {
 	//1
@@ -186,8 +195,19 @@ func main() {
 	// path2 := compose_filer(path1)
 	// compress_filer(path2)
 
-	//4（暂未做出）
+	//4
+fout, err := os.OpenFile("zzz.txt", os.O_CREATE|os.O_TRUNC|os.O_WRONLY, os.ModePerm)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	defer fout.Close()
 
+	writer := NewBufferedFileWriter(fout)
+	for i := 0; i < 5; i++ {
+		writer.WriteString("0123456789\n")
+	}
+	writer.Flush()
 }
 
 //go run homework/6/6.go
