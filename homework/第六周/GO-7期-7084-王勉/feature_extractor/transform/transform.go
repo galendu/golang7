@@ -25,4 +25,5 @@ type FarmHash struct {}
 
 func (FarmHash) Hash(str string,featureId int) unit64 {
 	return farm.Hase64WithSeed([]byte(str),unit64(featureId))
+
 }
