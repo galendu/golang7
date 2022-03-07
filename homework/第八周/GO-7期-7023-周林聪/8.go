@@ -16,8 +16,8 @@ import (
 
 //1.实现数字签名
 var (
-	privateKeyfilepath = "G:\\git仓库\\golang7\\homework\\第八周\\zlc_privatekey.pem"
-	publicKeyfilepath  = "G:\\git仓库\\golang7\\homework\\第八周\\zlc_publickey.pem"
+	privateKeyfilepath = "G:\\git仓库\\golang7\\homework\\第八周\\GO-7期-7023-周林聪\\zlc_privatekey.pem"
+	publicKeyfilepath  = "G:\\git仓库\\golang7\\homework\\第八周\\GO-7期-7023-周林聪\\zlc_publickey.pem"
 )
 
 func Digital_signature(trade string) ([]byte, error) {
