@@ -3,74 +3,82 @@ package main
 import (
 	"container/list"
 	"fmt"
+	"strconv"
 )
 
-var cache map[int]string
-var lst *list.List
-
-const CAP = 10 //定义缓存容量的上限
-
-func init() {
-	cache = make(map[int]string, CAP)
-	lst = list.New()
+type LRUCache struct {
+	cache map[int]string
+	lst   list.List
+	Cap   int //缓存容量的上限
 }
 
-func readFromDisk(key int) string {
-	return "china"
+func NewLRUCache(cap int) *LRUCache {
+	lru := new(LRUCache)
+	lru.Cap = cap
+	lru.cache = make(map[int]string, cap)
+	lru.lst = list.List{}
+	return lru
 }
 
-func read(key int) string {
-	if v, exists := cache[key]; exists { //命中缓存
-		head := lst.Front()
-		notFound := false
-		for {
-			if head == nil {
-				notFound = true
-				break
-			}
-			if head.Value.(int) == key { //从链表里找到相应的key
-				lst.MoveToFront(head) //把key移到链表头部
-				break
-			} else {
-				head = head.Next()
-			}
+func (lru *LRUCache) Add(key int, value string) {
+	if len(lru.cache) < lru.Cap { //还没有到达缓存容量上限
+		//直接把key value放到缓存中去
+		lru.cache[key] = value
+		lru.lst.PushFront(key)
+	} else { //刚刚到达缓存容量上限
+		//先从缓存中淘汰一个元素
+		back := lru.lst.Back()
+		delete(lru.cache, back.Value.(int)) //interface {} is nil, not int
+		lru.lst.Remove(back)
+		//然后再把key value放到缓存中去
+		lru.cache[key] = value
+		lru.lst.PushFront(key)
+	}
+}
+
+func (lru *LRUCache) find(key int) *list.Element {
+	if lru.lst.Len() == 0 {
+		return nil
+	}
+	head := lru.lst.Front()
+	for {
+		if head == nil {
+			break
 		}
-		if !notFound { //正常情况下不会发生这种情况
-			lst.PushFront(key)
+		if head.Value.(int) == key {
+			return head
+		} else {
+			head = head.Next()
 		}
-		return v
-	} else { //没有命中缓存
-		v = readFromDisk(key)  //从磁盘中读取数据
-		cache[key] = v         //放入缓存
-		lst.PushFront(key)     //放入链表头部
-		if len(cache) >= CAP { //缓存已满
-			tail := lst.Back()
-			delete(cache, tail.Value.(int)) //从缓存是移除很久不使用的元素
-			lst.Remove(tail)                //从链表中删除最后一个元素
-			fmt.Printf("remove %d from cache\n", tail.Value.(int))
-		}
-		return v
 	}
+	return nil
 }
 
-func TraversList(lst *list.List) {
-	head := lst.Front()
-	for head.Next() != nil {
-		fmt.Printf("%v ", head.Value)
-		head = head.Next()
+func (lru *LRUCache) Get(key int) (string, bool) {
+	value, exists := lru.cache[key]
+	ele := lru.find(key)
+	if ele != nil {
+		lru.lst.MoveToFront(ele)
 	}
-	fmt.Println(head.Value)
+	return value, exists
 }
 
-func main() {
-	for i := 0; i < 15; i++ {
-		_ = read(i)
+func testLRU() {
+	lru := NewLRUCache(10)
+	for i := 0; i < 10; i++ {
+		lru.Add(i, strconv.Itoa(i)) //9 8 7 6 5 4 3 2 1 0
 	}
-	for k, v := range cache {
-		fmt.Printf("%d:%s\n", k, v)
-	}
-	fmt.Println("--------------")
-	TraversList(lst)
-}
 
-//go run data_structure/lru/lru.go
+	for i := 0; i < 10; i += 2 {
+		lru.Get(i) //8 6 4 2 0 9 7 5 3 1
+	}
+
+	for i := 10; i < 15; i++ {
+		lru.Add(i, strconv.Itoa(i)) //14 13 12 11 10 8 6 4 2 0
+	}
+
+	for i := 0; i < 10; i++ {
+		_, exists := lru.Get(i)
+		fmt.Printf("key %d exists %t\n", i, exists) //9 7 5 3 1不存在，8 6 4 2 0存在
+	}
+}
