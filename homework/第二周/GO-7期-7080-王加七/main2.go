@@ -23,21 +23,6 @@ func len_duplicates() {
 	fmt.Printf("不同数字个数:%v\n", len(m))
 }
 
-//2.实现一个函数func arr2string(arr []int) string，比如输入[]int{2,4,6}，返回“2 4 6”。输入的切片可能很短，也可能很长。
-func len_duplicates() {
-	a := make([]int, 0, 10)
-	for i := 0; i < 100; i++ {
-		a = append(a, rand.Intn(128))
-	}
-	fmt.Printf("a=%v\n", a)
-	fmt.Printf("总数:%d\n", len(a))
-
-	m := make(map[int]int, 100)
-	for _, v := range a {
-		m[v] = v
-	}
-	fmt.Printf("不同数字个数:%v\n", len(m))
-}
 
 //2.实现一个函数func arr2string(arr []int) string，比如输入[]int{2,4,6}，返回“2 4 6”。输入的切片可能很短，也可能很长。
 func arr2string(arr []int) string {
