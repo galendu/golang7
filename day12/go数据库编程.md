@@ -25,13 +25,17 @@ mysql -h localhost -P 3306 -u root -p'123456'
 ```SQL
 create user 'tester' identified by '123456'
 ```
+创建database  
+```SQL
+create database test
+```
+把特定database的操作权限授予一个普通用户
+```SQL
+grant all on test.* to tester;
+```
 以普通用户登录
 ```Shell
 mysql -utester -p'123456'
-```
-创建database  
-```SQL
-create datase test
 ```
 使用database  
 ```SQL
@@ -214,8 +218,11 @@ db, err := sql.Open("mysql", "root:@tcp(localhost:3306)/test?charset=utf8")
 ```
 &#8195;&#8195;DSN(data source name)格式：  
 [username[:password]@][protocol[(address)]]/dbname[?param1=value1&...&paramN=valueN]  
-&#8195;&#8195;例如user:password@tcp(localhost:5555)/dbname?charset=utf8  
+&#8195;&#8195;例如user:password@tcp(localhost:5555)/dbname?charset=utf8mb4&parseTime=True  
 &#8195;&#8195;如果是本地MySQl，且采用默认的3306端口，可简写为：user:password@/dbname  
+连接参数  
+&#8195;&#8195;要支持完整的UTF-8编码，您需要将charset=utf8更改为charset=utf8mb4
+&#8195;&#8195;想要正确的处理time.Time ，您需要带上parseTime参数
 增删改  
 ```Go
 func (*sql.DB).Exec(sql string) (sql.Result, error)
@@ -655,11 +662,12 @@ name=MongoDB Repository baseurl=https://repo.mongodb.org/yum/redhat/$releasever/
 &#8195;&#8195;启动mongo: systemctl start mongod  
 mongo常用命令  
 ```
-use test;  切换到test库，如果没有则创建
-db.createUser({user: "tester",pwd: "123456", roles: [{role: "dbAdmin", db: "test"}]});创建用户
+use test;  切换到test库，如果没有则（创建集合时）会自动创建
 db.createCollection("student");  创建collection
+db.createUser({user: "tester",pwd: "123456", roles: [{role: "dbAdmin", db: "test"}]});创建用户
+登录mongo --port 27017 -u "tester" -p "123456" --authenticationDatabase "test"
 db.student.createIndex({"name":1});在name上创建索引,不是唯一索引
-db.student.insertOne({name:"张三",city:"北京"});
+ db.student.insertOne({name:"张三",city:"北京"});
 db.student.find({name:"张三"});
 db.student.update({name:"张三"},{name:"张三",city:"上海"})
 db.student.deleteOne({name:"张三"});
