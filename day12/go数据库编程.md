@@ -15,8 +15,12 @@ service mysqld start
 ```
 以管理员登录  
 ```Shell
-mysql -uroot
+mysql -h localhost -P 3306 -u root -p'123456'
 ```
+* -h：mysql server host，不写时默认是localhost。
+* -P：mysql server port，不写时默认是3306。
+* -u：user name，-u后可以加空格也可以不加。
+* -p：password，密码中可能包含空格，所以要加引号。高版本的mysql不允许在命令行中直接输入密码，此时只输入-p后面不要写密码即可。
 创建账号  
 ```SQL
 create user 'tester' identified by '123456'
