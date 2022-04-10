@@ -15,11 +15,6 @@ type Student struct {
 	Name  string
 	City  string
 	Score float32
-	context.Context
-}
-
-func (self Student) Say() {
-	self.Value("23")
 }
 
 func create(ctx context.Context, collection *mongo.Collection) {
@@ -68,39 +63,6 @@ func query(ctx context.Context, collection *mongo.Collection) {
 		database.CheckError(err)
 		fmt.Printf("%s %s %.2f\n", doc.Name, doc.City, doc.Score)
 	}
-}
-
-type MyContext struct {
-	values map[interface{}]interface{}
-}
-
-func (ctx MyContext) Value(key interface{}) interface{} {
-	if v, ok := ctx.values[key]; ok {
-		return v
-	} else {
-		return nil
-	}
-}
-func (ctx MyContext) Add(k, v interface{}) {
-	ctx.values[k] = v
-}
-
-func connect(ctx MyContext) {
-	//
-	//
-	ctx.Add("name", "zcy")
-}
-
-func query3(ctx MyContext) {
-
-	v := ctx.Value("name")
-	// v
-
-	ctx.Add(3, 5)
-}
-
-func s3(ctx MyContext) {
-
 }
 
 func main() {

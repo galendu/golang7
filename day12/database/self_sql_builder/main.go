@@ -10,6 +10,9 @@ import (
 	"strings"
 )
 
+/**
+先拿双向链表作个铺垫
+*/
 type Node struct {
 	value int
 	prev  *Node
@@ -49,6 +52,8 @@ func testDoubleLink() {
 	n2.toString() //9 8 1
 	n2.ToString() //4 8 9 1
 	n1.toString() //4 8 9 1
+	n4.ToString() //4 8 9 1
+	n4.toString() //1
 }
 
 //Builder 根据一个函数生成一小段sql
@@ -151,7 +156,7 @@ func newWhereBuilder(condition string) *WhereBuilder {
 	builder := &WhereBuilder{}
 	builder.sb.WriteString(" where ")
 	builder.sb.WriteString(condition)
-	return builder
+	return builder //sb: where score>30
 }
 
 func (self *WhereBuilder) getPrev() Builder {
@@ -258,6 +263,7 @@ func (self *SelectBuilder) ToString() string {
 }
 
 func main() {
+	// testDoubleLink()
 	//Where、OrderBy、Limit有没有都不影响调用ToString();Where里的And和Or有没有都不影响调用ToString()
 	sql := NewSelectBuilder("student").Column("id,name,city").
 		Where("id>0").

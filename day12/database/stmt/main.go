@@ -110,6 +110,7 @@ func delete(db *sql.DB) {
 }
 
 func hugeInsert(db *sql.DB) {
+	begin := time.Now()
 	stmt, err := db.Prepare("insert into student (name,province,city,enrollment) values (?,?,?,?)")
 	database.CheckError(err)
 	date, err := time.ParseInLocation("20060102", "20211204", loc)
@@ -117,6 +118,7 @@ func hugeInsert(db *sql.DB) {
 	for i := 0; i < 100000; i++ {
 		stmt.Exec("宋江"+strconv.Itoa(i), "山西", "大同", date)
 	}
+	fmt.Printf("huge insert use %d ms\n", time.Since(begin).Milliseconds())
 }
 
 //traverse1 通过limit offset,n遍历表
@@ -124,7 +126,7 @@ func traverse1(db *sql.DB) {
 	var offset int
 	begin := time.Now()
 	stmt, _ := db.Prepare("select id,name,province from student limit ?,100")
-	for i := 0; i < 100; i++ {
+	for i := 0; i < 1000; i++ {
 		t0 := time.Now()
 		rows, _ := stmt.Query(offset)
 		offset += 100
@@ -145,10 +147,10 @@ func traverse2(db *sql.DB) {
 	var maxid int
 	begin := time.Now()
 	stmt, _ := db.Prepare("select id,name,province from student where id>? limit 100") //limit m,n  limit 0,n
-	for i := 0; i < 100; i++ {
+	for i := 0; i < 1000; i++ {
 		t0 := time.Now()
 		rows, _ := stmt.Query(maxid)
-		fmt.Println(i, time.Since(t0))
+		fmt.Printf("%d %dus\n", i, time.Since(t0).Microseconds())
 
 		for rows.Next() {
 			var id int
@@ -167,7 +169,7 @@ func main() {
 	//连接数据库的规范格式：user:password@tcp(localhost:5555)/dbname?charset=utf8
 	//如果是本地，且采用默认的3306端口，可简写为：user:password@/dbname
 	// db, err := sql.Open("mysql", "root:@/test")
-	db, err := sql.Open("mysql", "root:@tcp(localhost:3306)/test?charset=utf8")
+	db, err := sql.Open("mysql", "tester:123456@tcp(localhost:3306)/test?charset=utf8")
 	database.CheckError(err)
 	// insert(db)
 	// replace(db)
@@ -177,6 +179,6 @@ func main() {
 	// fmt.Println()
 
 	// hugeInsert(db)
-	traverse1(db)
+	// traverse1(db)
 	traverse2(db)
 }

@@ -21,7 +21,7 @@ type Student struct {
 	Enrollment time.Time `gorm:"column:enrollment;type:date"`
 }
 
-//使用TableName()来修改默认的表象
+//使用TableName()来修改默认的表名
 func (Student) TableName() string {
 	return "student"
 }
@@ -52,9 +52,11 @@ func query(db *gorm.DB) {
 	student = Student{} //清空student，防止前后影响
 	students = []Student{}
 	db.First(&student, 1)
+	// db.Where("id=?",1).First(&student)
 	fmt.Println(student.Name)
 	fmt.Println()
 	db.Find(&students, []int{1, 2, 3})
+	// db.Where("id in ?", []int{1, 2, 3}).Find(&students)
 	for _, ele := range students {
 		fmt.Printf("id=%d, name=%s\n", ele.Id, ele.Name)
 	}
@@ -139,9 +141,28 @@ func delete(db *gorm.DB) {
 
 func transaction(db *gorm.DB) {
 	tx := db.Begin()
+	defer tx.Rollback() //调用commit后也可以调用rollback，相当于rollback没起任何作用
 	for i := 0; i < 10; i++ {
 		student := Student{Name: "学生" + strconv.Itoa(i), Province: "北京", City: "北京", Score: 38, Enrollment: time.Now()}
-		db.Create(&student)
+		if err := tx.Create(&student).Error; err != nil { //注意是tx.Create，不是db.Create
+			return //函数返回
+		}
+	}
+	tx.Commit()
+	fmt.Println("=============transaction end=============")
+}
+
+func transaction2(db *gorm.DB) {
+	tx := db.Begin()
+	defer tx.Rollback()
+	for i := 0; i < 10; i++ {
+		student := Student{Name: "学生" + strconv.Itoa(i), Province: "北京", City: "北京", Score: 38, Enrollment: time.Now()}
+		if err := tx.Create(&student).Error; err != nil {
+			return
+		}
+		if i == 5 {
+			tx.Rollback() //Rollback之后事务就被关闭了，不能再调用tx.Create()了
+		}
 	}
 	tx.Commit()
 	fmt.Println("=============transaction end=============")
@@ -150,14 +171,15 @@ func transaction(db *gorm.DB) {
 func main() {
 	//想要正确的处理time.Time ，您需要带上parseTime参数
 	//要支持完整的UTF-8编码，您需要将charset=utf8更改为charset=utf8mb4
-	dsn := "root:@tcp(127.0.0.1:3306)/test?charset=utf8mb4&parseTime=True"
+	dsn := "tester:123456@tcp(127.0.0.1:3306)/test?charset=utf8mb4&parseTime=True"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	database.CheckError(err)
-	db.AutoMigrate(&Student{})
+	db.AutoMigrate(&Student{}) //让数据库之前存储的记录的表格字段和程序中最新使用的表格字段保持一致（只增不减）
 	// query(db)
 	// update(db)
 	// create(db)
 	// delete(db)
-	transaction(db)
-	db.Where("name like ?", "学生%").Delete(&Student{}) //删除name以"学生"为前缀的记录
+	// transaction(db)
+	transaction2(db)
+	// db.Where("name like ?", "学生%").Delete(&Student{}) //删除name以"学生"为前缀的记录
 }

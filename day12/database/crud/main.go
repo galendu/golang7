@@ -35,7 +35,7 @@ func insert(db *sql.DB) {
 //replace 插入(覆盖)数据
 func replace(db *sql.DB) {
 	//由于name字段上有唯一索引，insert重复的name会报错。而使用replace会先删除，再插入
-	res, err := db.Exec("replace into student (name,province,city,enrollment) values ('小明', '深圳', '深圳', '2021-04-18'), ('小红', '上海', '上海', '2021-04-26')")
+	res, err := db.Exec("replace into student (name,province,city,enrollment) values ('小明', '深圳', '深圳', '2021-04-20'), ('小红', '上海', '上海', '2021-04-26')")
 	database.CheckError(err)
 	lastId, err := res.LastInsertId() //ID自增，用过的id（即使对应的行已delete）不会重复使用
 	database.CheckError(err)
@@ -88,9 +88,9 @@ func main() {
 	如果是本地MySQl，且采用默认的3306端口，可简写为：user:password@/dbname
 	*/
 	// db, err := sql.Open("mysql", "root:@/test")
-	db, err := sql.Open("mysql", "root:@tcp(localhost:3306)/test?charset=utf8")
+	db, err := sql.Open("mysql", "tester:123456@tcp(localhost:3306)/test?charset=utf8")
 	database.CheckError(err)
-	delete(db)
+	// delete(db)
 	insert(db)
 	// replace(db)
 	// update(db)

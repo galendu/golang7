@@ -135,22 +135,28 @@ func delete2(db *sql.DB) {
 }
 
 func main() {
-	query()
-	insert()
-	update()
-	delete()
-	fmt.Println("==================")
+	/**
+	* 生成SQL语句
+	 */
+	// query()
+	// insert()
+	// update()
+	// delete()
+	// fmt.Println("==================")
 
+	/**
+	* 生成SQL语句，并执行
+	 */
 	dbName := "test"
-	user := "root"
-	password := ""
+	user := "tester"
+	password := "123456"
 	host := "localhost"
 	db, err := manager.New(dbName, user, password, host).Set(
 		manager.SetCharset("utf8"),
 	).Port(3306).Open(true)
 	database.CheckError(err)
 	query2(db)
-	insert2(db)
-	update2(db)
-	delete2(db)
+	// insert2(db)
+	// update2(db)
+	// delete2(db)
 }
